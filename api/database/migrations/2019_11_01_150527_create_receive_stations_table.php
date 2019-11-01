@@ -20,11 +20,12 @@ class CreateReceiveStationsTable extends Migration
             $table->softDeletes();
             $table->unsignedBigInteger('approve_token_id');
             $table->timestamp('approved_at')->nullable();
-            $table->string('submitted_by')->nullable();
+
+            $table->string('proposal_email')->nullable();
+            $table->text('proposal_comment')->nullable();
 
             $table->string('name');
             $table->string('operator');
-            $table->string('wmo_id')->nullable();
             $table->double('lat');
             $table->double('long');
             $table->double('elevation')->nullable();
@@ -32,6 +33,7 @@ class CreateReceiveStationsTable extends Migration
             $table->string('antenna_type')->nullable();
             $table->string('processing_system_type')->nullable();
             $table->integer('concurrent_receivers')->nullable();
+            $table->string('reporting_to')->nullable();
 
             $table->foreign('approve_token_id')->references('id')->on('approve_tokens');
             $table->foreign('base_id')->references('id')->on('receive_stations');

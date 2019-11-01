@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\MustBeApproved;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\ReceiveStation
@@ -51,17 +52,18 @@ use Illuminate\Database\Eloquent\Model;
 class ReceiveStation extends Model
 {
     use MustBeApproved;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
         'operator',
-        'wmo_id',
-        'long',
         'lat',
+        'long',
         'elevation',
         'antenna_height',
         'antenna_type',
         'processing_system_type',
         'concurrent_receivers',
+        'reporting_to',
     ];
 }
