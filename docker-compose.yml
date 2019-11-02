@@ -47,6 +47,8 @@ services:
       MYSQL_ROOT_PASSWORD:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
     networks:
       - app-network
 
@@ -66,3 +68,7 @@ services:
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
