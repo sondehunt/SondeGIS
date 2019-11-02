@@ -77,4 +77,8 @@ class ReceiveStation extends Model
         'concurrent_receivers',
         'reporting_to',
     ];
+
+    protected $casts = [
+        'reporting_to' => 'array',
+    ];
 }

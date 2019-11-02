@@ -33,7 +33,7 @@ class CreateReceiveStationsTable extends Migration
             $table->string('antenna_type')->nullable();
             $table->string('processing_system_type')->nullable();
             $table->integer('concurrent_receivers')->nullable();
-            $table->string('reporting_to')->nullable();
+            $table->json('reporting_to')->nullable();
 
             $table->foreign('approve_token_id')->references('id')->on('approve_tokens');
             $table->foreign('base_id')->references('id')->on('receive_stations');
