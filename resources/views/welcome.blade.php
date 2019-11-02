@@ -353,52 +353,70 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form v-on:submit.prevent="proposeReceiveStation()" ref="receive_station_proposal">
                         <div class="form-group">
-                            <label for="hunterNick">(Nick)Name*</label>
-                            <input type="text" class="form-control" id="hunterNick" required placeholder="e.g. 'bazingaJojo'">
+                            <label for="siteName">Name*</label>
+                            <input v-model="receive_station.name" type="text" class="form-control" id="siteName" required placeholder="e.g. 'DB4ZJO-11'">
                         </div>
                         <div class="form-group">
-                            <label for="hunterContact">Contact</label>
-                            <input type="text" class="form-control mb-3" id="hunterContact" required placeholder="callsign e.g. 'DB4ZJO'">
-                            <input type="text" class="form-control mb-3" id="hunterContact" placeholder="github user name e.g. 'bazjo'">
-                            <input type="text" class="form-control mb-3" id="hunterContact" placeholder="telegram user name e.g. 'bazjo'">
-                            <input type="text" class="form-control" id="hunterContact" placeholder="radiosondy user name e.g. 'bazjo'">
+                            <label for="siteOperator">Operator*</label>
+                            <input v-model="receive_station.operator" type="text" class="form-control" id="siteOperator" required placeholder="e.g. 'DB4ZJO'">
                         </div>
                         <div class="form-group">
-                            <label for="areaCenter">Location*</label>
+                            <label for="siteLocation">Location*</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="form-control" id="areaCenterLat" required placeholder="Latitude e.g. '51.1234'">
+                                    <input v-model="receive_station.lat" type="text" class="form-control" id="siteLocationLat" required placeholder="Latitude e.g. '51.1234'">
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" id="areaCenterLon" required placeholder="Longitude e.g. '7.5678'">
+                                    <input v-model="receive_station.long" type="text" class="form-control" id="siteLocationLon" required placeholder="Longitude e.g. '7.5678'">
                                 </div>
                             </div>
-                            <small id="areaCenterHelp" class="form-text text-muted">The position will be diluted before sending and will be shown with an uncertainty of 100 m</small>
                         </div>
                         <div class="form-group">
-                            <label for="areaDiameter">Hunting Radius*</label>
-                            <input type="text" class="form-control" id="areaDiameter" required placeholder="Radius shown on map [km] e.g. '60'">
+                            <label for="siteAltASL">Elevation</label>
+                            <input v-model="receive_station.elevation" type="text" class="form-control" id="siteAltASL" placeholder="above sea level [m] e.g. '580'">
                         </div>
                         <div class="form-group">
-                            <label for="siteAltAGL">Hunting Probability*</label>
-                            <input type="text" class="form-control" id="siteAltAGL" required placeholder="probality a hunter will tty to catch a sonde in his area [%] e.g. '50'">
+                            <label for="siteAltAGL">Antenna Height</label>
+                            <input v-model="receive_station.antenna_height" type="text" class="form-control" id="siteAltAGL" placeholder="above ground level [m] e.g. '34'">
                         </div>
                         <div class="form-group">
-                            <label for="hunterEMail">Your E-Mail*</label>
-                            <input type="email" class="form-control" id="hunterMail" required placeholder="E-Mail Address">
-                            <small id="hunterEMailHelp" class="form-text text-muted">Your E-Mail is only used to sent you information whether your proposal was accepted</small>
+                            <label for="siteAntenna">Antenna Type</label>
+                            <input v-model="receive_station.antenna_type" type="text" class="form-control" id="siteAntenna" placeholder="e.g. 'Diamond X30'">
                         </div>
                         <div class="form-group">
-                            <label for="hunterComment">Your Comment</label>
-                            <textarea class="form-control" id="hunterComment" rows="3" placeholder="Additional Information or Sources; Proof of consent if you are not signing up yourself!"></textarea>
-                            <small id="hunterCommentHelp" class="form-text text-muted">Comments are only sent to the administrator who reviews your request</small>
+                            <label for="siteProcessingSystem">Processing System Type</label>
+                            <input v-model="receive_station.processing_system_type" type="text" class="form-control" id="siteProcessingSystem" placeholder="e.g. 'Raspberry Pi 4 4GB + 3 NESDR Smart'">
+                        </div>
+                        <div class="form-group">
+                            <label for="siteConcurrentReceivers">Number of concurrent Receivers</label>
+                            <input v-model="receive_station.concurrent_receivers" type="text" class="form-control" id="siteConcurrentReceivers" placeholder="e.g. '24'">
+                        </div>
+                        <div class="form-group">
+                            <label for="siteReport">Reporting to</label>
+                            <select v-model="receive_station.reporting_to" class="selectpicker form-control" multiple data-live-search="true">
+                                <option>aprs.fi</option>
+                                <option>sondehub.org</option>
+                                <option>radiosondy.info</option>
+                                <option>wetterson.de</option>
+                                <option>proprietary site</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="siteEMail">Your E-Mail*</label>
+                            <input v-model="proposal.email" type="email" class="form-control" id="siteEMail" required placeholder="E-Mail Address">
+                            <small id="siteEMailHelp" class="form-text text-muted">Your E-Mail is only used to sent you information whether your proposal was accepted</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="siteComment">Your Comment</label>
+                            <textarea v-model="proposal.comment" class="form-control" id="siteComment" rows="3" placeholder="Additional Information or Sources; Proof of consent if you are not signing up yourself!"></textarea>
+                            <small id="siteCommentHelp" class="form-text text-muted">Comments are only sent to the administrator who reviews your request</small>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Propose Addition/Edit</button>
+                    <button v-on:click="proposeReceiveStation()" type="button" class="btn btn-success">Propose Addition/Edit</button>
                 </div>
             </div>
         </div>
