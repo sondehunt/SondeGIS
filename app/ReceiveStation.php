@@ -10,14 +10,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * App\ReceiveStation
  *
  * @property int $id
+ * @property int|null $base_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int $approve_token_id
  * @property string|null $approved_at
- * @property string|null $submitted_by
+ * @property string|null $proposal_email
+ * @property string|null $proposal_comment
  * @property string $name
  * @property string $operator
- * @property string|null $wmo_id
  * @property float $lat
  * @property float $long
  * @property float|null $elevation
@@ -25,12 +27,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $antenna_type
  * @property string|null $processing_system_type
  * @property int|null $concurrent_receivers
+ * @property string|null $reporting_to
+ * @property-read \App\ApproveToken $approveToken
+ * @property-read \App\ReceiveStation|null $base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation approved()
+ * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation newQuery()
+ * @method static \Illuminate\Database\Query\Builder|\App\ReceiveStation onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation query()
+ * @method static bool|null restore()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereAntennaHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereAntennaType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereApproveTokenId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereApprovedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereBaseId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereConcurrentReceivers($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereDeletedAt($value)
@@ -41,13 +52,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereOperator($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereProcessingSystemType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereSubmittedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereProposalComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereProposalEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereReportingTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereWmoId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\ReceiveStation withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\ReceiveStation withoutTrashed()
  * @mixin \Eloquent
- * @property int $approve_token_id
- * @property-read \App\ApproveToken $approveToken
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereApproveTokenId($value)
  */
 class ReceiveStation extends Model
 {
