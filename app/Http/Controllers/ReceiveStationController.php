@@ -9,7 +9,7 @@ class ReceiveStationController extends Controller
 {
     public function index(Request $request)
     {
-        return ReceiveStation::all();
+        return ReceiveStation::approved()->all();
     }
 
     public function store(Request $request)
