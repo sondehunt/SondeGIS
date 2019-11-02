@@ -47,4 +47,4 @@ USER www
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
-CMD composer install && php-fpm
+CMD composer install && php artisan migrate:fresh --seed && php-fpm
