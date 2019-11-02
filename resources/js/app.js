@@ -1,4 +1,4 @@
-require('./bootstrap');
+//require('./bootstrap');
 
 document.addEventListener("DOMContentLoaded", () => {
     $('select').selectpicker();
@@ -26,13 +26,13 @@ var app = new Vue({
         receive_station: {
             name: "",
             operator: "",
-            lat: "",
-            long: "",
-            elevation: "",
-            antenna_height: "",
+            lat: null,
+            long: null,
+            elevation: null,
+            antenna_height: null,
             antenna_type: "",
             processing_system_type: "",
-            concurrent_receivers: "",
+            concurrent_receivers: null,
             reporting_to: []
         },
         proposal: {
@@ -42,11 +42,19 @@ var app = new Vue({
     },
     methods: {
         proposeReceiveStation() {
-            if(!this.$refs.receive_station_proposal.checkValidity()){
-                this.$refs.receive_station_proposal.reportValidity();
+            if(!this.$refs.receive_station_proposal.reportValidity()){
                 return;
             }
-            fetch()
+            fetch(window.api_url + "/receive_stations", {
+              body: JSON.stringify({
+                receive_station: this.receive_station,
+                proposal: this.proposal
+              }),
+              headers: {
+                "Content-Type": "application/json"
+              },
+              method: "POST"
+            })
         }
     }
 })

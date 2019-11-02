@@ -366,20 +366,20 @@
                             <label for="siteLocation">Location*</label>
                             <div class="row">
                                 <div class="col">
-                                    <input v-model="receive_station.lat" type="text" class="form-control" id="siteLocationLat" required placeholder="Latitude e.g. '51.1234'">
+                                    <input v-model="receive_station.lat" type="number" class="form-control" id="siteLocationLat" required placeholder="Latitude e.g. '51.1234'">
                                 </div>
                                 <div class="col">
-                                    <input v-model="receive_station.long" type="text" class="form-control" id="siteLocationLon" required placeholder="Longitude e.g. '7.5678'">
+                                    <input v-model="receive_station.long" type="number" class="form-control" id="siteLocationLon" required placeholder="Longitude e.g. '7.5678'">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="siteAltASL">Elevation</label>
-                            <input v-model="receive_station.elevation" type="text" class="form-control" id="siteAltASL" placeholder="above sea level [m] e.g. '580'">
+                            <input v-model="receive_station.elevation" type="number" class="form-control" id="siteAltASL" placeholder="above sea level [m] e.g. '580'">
                         </div>
                         <div class="form-group">
                             <label for="siteAltAGL">Antenna Height</label>
-                            <input v-model="receive_station.antenna_height" type="text" class="form-control" id="siteAltAGL" placeholder="above ground level [m] e.g. '34'">
+                            <input v-model="receive_station.antenna_height" type="number" class="form-control" id="siteAltAGL" placeholder="above ground level [m] e.g. '34'">
                         </div>
                         <div class="form-group">
                             <label for="siteAntenna">Antenna Type</label>
@@ -391,7 +391,7 @@
                         </div>
                         <div class="form-group">
                             <label for="siteConcurrentReceivers">Number of concurrent Receivers</label>
-                            <input v-model="receive_station.concurrent_receivers" type="text" class="form-control" id="siteConcurrentReceivers" placeholder="e.g. '24'">
+                            <input v-model="receive_station.concurrent_receivers" type="number" class="form-control" id="siteConcurrentReceivers" placeholder="e.g. '24'">
                         </div>
                         <div class="form-group">
                             <label for="siteReport">Reporting to</label>
@@ -430,6 +430,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+<script type="text/javascript">
+  window.api_url="{{env('APP_URL')}}/api";
+</script>
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
