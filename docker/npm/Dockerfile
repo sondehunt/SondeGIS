@@ -5,4 +5,4 @@ WORKDIR /var/www
 
 RUN npm install --global cross-env
 
-CMD npm install && npm run watch
+CMD npm install && npm run watch-poll
