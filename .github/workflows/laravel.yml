@@ -39,4 +39,4 @@ jobs:
         echo "${{ secrets.PRODUCTION_PRIVATE_KEY }}" >> ~/.ssh/id_dsa
         chmod 600 ~/.ssh/id_dsa
         echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-        rsync -rav --delete ./ ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }}:${{ secrets.PRODUCTION_PATH }}
+        rsync -rav --delete --exclude-from '.deploy_excludes.txt' ./ ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }}:${{ secrets.PRODUCTION_PATH }}
