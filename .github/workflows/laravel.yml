@@ -27,13 +27,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1.1.0
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install PHP Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-    - name: Generate key
-      run: php artisan key:generate
     - name: Install JS Dependencies
       run: npm ci
-    - name: transpile assets
+    - name: Transpile assets
       run: npm run prod
+    - name: Deploy to server
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.PRODUCTION_PRIVATE_KEY }}" >> ~/.ssh/id_dsa
+        chmod 600 ~/.ssh/id_dsa
+        echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        rsync -rav --delete ./ ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }}:${{ secrets.PRODUCTION_PATH }}
