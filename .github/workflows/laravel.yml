@@ -23,7 +23,7 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
   laravel-deploy:
-    #needs: laravel-tests
+    needs: laravel-tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1.1.0
@@ -42,3 +42,13 @@ jobs:
         rsync -rav --delete --exclude-from '.deploy_excludes.txt' ./ ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }}:${{ secrets.PRODUCTION_PATH }}
     - name: Migrate DB on server
       run: ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan migrate --force"
+    - name: Optimizations
+      run: |
+        ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan clear-compiled"
+        ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan optimize"
+        ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan cache:clear"
+        ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan config:clear"
+        ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan route:clear"
+        ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan view:clear"
+        ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan config:cache"
+        ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan route:cache"
