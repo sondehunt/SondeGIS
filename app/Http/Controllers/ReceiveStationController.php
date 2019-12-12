@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class ReceiveStationController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        return ReceiveStation::approved()->all();
+        return ReceiveStation::approved()->get();
     }
 
     public function store(Request $request)
