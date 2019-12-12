@@ -79,33 +79,45 @@
                 <h6 class="card-subtitle mt-3 mb-2 text-muted">Observation Time</h6>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck7">
-                    <label class="custom-control-label" for="customCheck7">00Z or 12Z</label>
+                    <label class="custom-control-label" for="customCheck7">1 per day</label>
                 </div>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck8">
-                    <label class="custom-control-label" for="customCheck8">00Z/12Z</label>
+                    <label class="custom-control-label" for="customCheck8">2 per day</label>
                 </div>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck9">
-                    <label class="custom-control-label" for="customCheck9">00Z/06Z/12Z/18Z</label>
+                    <label class="custom-control-label" for="customCheck9">4 per day</label>
                 </div>
 
                 <h6 class="card-subtitle mt-3 mb-2 text-muted">Sonde Family</h6>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label" for="customCheck1">RS41</label>
+                    <label class="custom-control-label" for="customCheck1">Vaisala</label>
                 </div>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck2">
-                    <label class="custom-control-label" for="customCheck2">DFM-09</label>
+                    <label class="custom-control-label" for="customCheck2">Lockheed Martin</label>
                 </div>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck3">
-                    <label class="custom-control-label" for="customCheck3">M10</label>
+                    <label class="custom-control-label" for="customCheck3">Meteomodem</label>
                 </div>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck4">
-                    <label class="custom-control-label" for="customCheck4">iMS-100</label>
+                    <label class="custom-control-label" for="customCheck4">Graw</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck21">
+                    <label class="custom-control-label" for="customCheck21">Meisei</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck31">
+                    <label class="custom-control-label" for="customCheck31">var. Russian</label>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck41">
+                    <label class="custom-control-label" for="customCheck41">var. Chinese</label>
                 </div>
             </div>
         </div>
