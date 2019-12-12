@@ -16,7 +16,7 @@
 <div id="app">
     <!--NAVBAR-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <img src="assets/parachute.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="{{ asset('assets/parachute.svg') }}" width="30" height="30" class="d-inline-block align-top" alt="">
         <a class="navbar-brand ml-2">SondeGIS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav navbar-right mr-2">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/bazjo/SondeGIS">Github</a>
+                    <a class="nav-link" href="https://github.com/sondehunt/SondeGIS">Github</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://sondehunt.de">Main Page</a>
