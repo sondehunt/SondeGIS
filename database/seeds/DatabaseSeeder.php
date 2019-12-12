@@ -1,16 +1,15 @@
 <?php
 
+use App\ApproveToken;
+use App\ReceiveStation;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run() : void
     {
-        // $this->call(UsersTableSeeder::class);
+        factory(ApproveToken::class, 942)->create()->each(static function (ApproveToken $approve_token) {
+            $approve_token->receive_stations()->save(factory(ReceiveStation::class)->make());
+        });
     }
 }

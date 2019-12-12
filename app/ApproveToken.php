@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 /**
@@ -30,5 +31,10 @@ class ApproveToken extends Model
     public static function generate() : string
     {
         return Str::random(256);
+    }
+
+    public function receive_stations() : HasMany
+    {
+        return $this->hasMany(ReceiveStation::class);
     }
 }
