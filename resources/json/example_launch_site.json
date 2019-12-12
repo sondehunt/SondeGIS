@@ -1,0 +1,71 @@
+{
+    "name": "Essen-Bredney",
+    "operator": "Deutscher Wetterdienst",
+    "wmo-id": 10410,
+    "latitude": "51.123",
+    "longitude": "7.456",
+    "elevation": "253",
+    "launch": [
+        {
+            "type": "operational",
+            "schedule": [
+                {
+                    "month": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12
+                    ],
+                    "weekday": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7
+                    ],
+                    "observation-time": [
+                        "00Z",
+                        "12Z"
+                    ],
+                    "launch-time": [
+                        "2245Z",
+                        "1045Z"
+                    ]
+                }
+            ],
+            "frequency-prim": 405.3,
+            "frequency-sec": [
+                404.1
+            ],
+            "sonde": [
+                {
+                    "model": {
+                        "manufacturer": "Vaisala",
+                        "family": "RS41 Family",
+                        "model": "RS41-SGP"
+                    },
+                    "autosonde": true,
+                    "xdata": [
+                        "OIF411 Ozone Sonde",
+                        "Cobald",
+                        "ECC CFH"
+                    ]
+                }
+            ],
+            "ballon": "white, 600g",
+            "gas": "Helium",
+            "parachute": "white, 60cm, inside ballon",
+            "annotations": "sporadic additional launches at 06Z/18Z"
+        }
+    ]
+}
