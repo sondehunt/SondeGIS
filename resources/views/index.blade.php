@@ -159,62 +159,62 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="siteName">Name*</label>
-                            <input type="text" class="form-control" id="siteName" required placeholder="e.g. 'Essen-Bredney'">
+                            <label for="launchSiteName">Name*</label>
+                            <input type="text" class="form-control" id="launchSiteName" required placeholder="e.g. 'Essen-Bredney'">
                         </div>
                         <div class="form-group">
-                            <label for="siteOperator">Operator*</label>
-                            <input type="text" class="form-control" id="siteOperator" required placeholder="e.g. 'Deutscher Wetterdienst'">
+                            <label for="launchSiteOperator">Operator*</label>
+                            <input type="text" class="form-control" id="launchSiteOperator" required placeholder="e.g. 'Deutscher Wetterdienst'">
                         </div>
                         <div class="form-group">
-                            <label for="siteOperator">WMO-ID</label>
-                            <input type="text" class="form-control" id="siteWmoId" required placeholder="e.g. '10410'">
+                            <label for="launchSiteWmoId">WMO-ID</label>
+                            <input type="text" class="form-control" id="launchSiteWmoId" required placeholder="e.g. '10410'">
                         </div>
                         <div class="form-group">
-                            <label for="siteLocation">Location*</label>
+                            <label for="launchSiteLocationLat">Location*</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="form-control" id="siteLocationLat" required placeholder="Latitude e.g. '51.1234'">
+                                    <input type="text" class="form-control" id="launchSiteLocationLat" required placeholder="Latitude e.g. '51.1234'">
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="form-control" id="siteLocationLon" required placeholder="Longitude e.g. '7.5678'">
+                                    <input type="text" class="form-control" id="launchSiteLocationLon" required placeholder="Longitude e.g. '7.5678'">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="siteAltASL">Elevation</label>
-                            <input type="text" class="form-control" id="siteAltASL" placeholder="above sea level [m] e.g. '580'">
+                            <label for="launchSiteAltASL">Elevation</label>
+                            <input type="text" class="form-control" id="launchSiteAltASL" placeholder="above sea level [m] e.g. '580'">
                         </div>
                         <!--LAUNCHES-->
                         <h4>Launch</h4>
                         <div class="form-group">
                             <label for="siteReport">Type</label>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="siteLaunchType" id="siteLaunchTypeOperational">
-                                <label class="custom-control-label" for="siteLaunchTypeOperational">operational</label>
+                                <input type="radio" class="custom-control-input" name="siteLaunchType" id="launchSiteLaunchTypeOperational">
+                                <label class="custom-control-label" for="launchSiteLaunchTypeOperational">operational</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" name="siteLaunchType" id="siteLaunchTypeSporadic">
-                                <label class="custom-control-label" for="siteLaunchTypeSporadic">sporadic</label>
+                                <input type="radio" class="custom-control-input" name="siteLaunchType" id="launchSiteLaunchTypeSporadic">
+                                <label class="custom-control-label" for="launchSiteLaunchTypeSporadic">sporadic</label>
                             </div>
                         </div>
                         <h5>Schedule</h5>
 
                         <div class="form-group">
-                            <label for="siteFreqPrim">Primary Frequency</label>
-                            <input type="text" class="form-control" id="siteFreqPrim" placeholder="e.g. '405.3'">
+                            <label for="launchSiteFreqPrim">Primary Frequency</label>
+                            <input type="text" class="form-control" id="launchSiteFreqPrim" placeholder="e.g. '405.3'">
                         </div>
                         <div class="form-group">
-                            <label for="siteFreqPrim">Secondary Frequencies</label>
-                            <input type="text" class="form-control" id="siteFreqPrim" placeholder="e.g. '405.3'">
+                            <label for="launchSiteFreqSec">Secondary Frequencies</label>
+                            <input type="text" class="form-control" id="launchSiteFreqSec" placeholder="e.g. '405.3'">
                             <button class="btn btn-success">+</button>
                             <button class="btn btn-danger">-</button>
                         </div>
                         <h5>Sonde</h5>
 
                         <div class="form-group">
-                            <label for="siteLaunchBallon">Ballon</label>
-                            <select id="siteLaunchBallon" class="form-control">
+                            <label for="launchSiteLaunchBallon">Ballon</label>
+                            <select id="launchSiteLaunchBallon" class="form-control">
                                 <option>red, 100g</option>
                                 <option>white, 600g</option>
                             </select>
@@ -222,36 +222,36 @@
                         <div class="form-group">
                             <label for="siteLaunchGas">Gas</label>
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="siteLaunchGas" id="siteLaunchGasHydrogen">
-                                <label class="custom-control-label" for="siteLaunchGasHydrogen">hydrogen</label>
+                                <input type="radio" class="custom-control-input" name="siteLaunchGas" id="launchSiteLaunchGasHydrogen">
+                                <label class="custom-control-label" for="launchSiteLaunchGasHydrogen">hydrogen</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" name="siteLaunchGas" id="siteLaunchGasHelium">
-                                <label class="custom-control-label" for="siteLaunchGasHelium">helium</label>
+                                <input type="radio" class="custom-control-input" name="siteLaunchGas" id="launchSiteLaunchGasHelium">
+                                <label class="custom-control-label" for="launchSiteLaunchGasHelium">helium</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="siteLaunch>Parachute">Parachute</label>
-                            <select id="siteLaunch>Parachute" class="form-control">
+                            <label for="launchSiteLaunch>Parachute">Parachute</label>
+                            <select id="launchSiteLaunch>Parachute" class="form-control">
                                 <option>white, 60cm, inside ballon</option>
                                 <option>white, 40cm, inside ballon</option>
                                 <option>none</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="siteAnnotations">Annotations</label>
-                            <input type="text" class="form-control" id="siteAnnotations" placeholder="e.g. 'sporadic additional launches at 06Z/18Z'">
+                            <label for="launchSiteAnnotations">Annotations</label>
+                            <input type="text" class="form-control" id="launchSiteAnnotations" placeholder="e.g. 'sporadic additional launches at 06Z/18Z'">
                         </div>
 
                         <div class="form-group">
-                            <label for="siteEMail">Your E-Mail*</label>
-                            <input type="email" class="form-control" id="siteEMail" required placeholder="E-Mail Address">
-                            <small id="siteEMailHelp" class="form-text text-muted">Your E-Mail is only used to sent you information whether your proposal was accepted</small>
+                            <label for="launchSiteEMail">Your E-Mail*</label>
+                            <input type="email" class="form-control" id="launchSiteEMail" required placeholder="E-Mail Address">
+                            <small id="launchSiteEMailHelp" class="form-text text-muted">Your E-Mail is only used to sent you information whether your proposal was accepted</small>
                         </div>
                         <div class="form-group">
-                            <label for="siteComment">Your Comment</label>
-                            <textarea class="form-control" id="siteComment" rows="3" placeholder="Additional Information or Sources; Proof of consent if you are not signing up yourself!"></textarea>
-                            <small id="siteCommentHelp" class="form-text text-muted">Comments are only sent to the administrator who reviews your request</small>
+                            <label for="launchSiteComment">Your Comment</label>
+                            <textarea class="form-control" id="launchSiteComment" rows="3" placeholder="Additional Information or Sources; Proof of consent if you are not signing up yourself!"></textarea>
+                            <small id="launchSiteCommentHelp" class="form-text text-muted">Comments are only sent to the administrator who reviews your request</small>
                         </div>
                     </form>
                 </div>
@@ -275,47 +275,47 @@
                 <div class="modal-body">
                     <form v-on:submit.prevent="proposeReceiveStation()" ref="receive_station_proposal">
                         <div class="form-group">
-                            <label for="siteName">Name*</label>
-                            <input v-model="receive_station.name" type="text" class="form-control" id="siteName" required placeholder="e.g. 'DB4ZJO-11'">
+                            <label for="receiveStationName">Name*</label>
+                            <input v-model="new_receive_station.name" type="text" class="form-control" id="receiveStationName" required placeholder="e.g. 'DB4ZJO-11'">
                         </div>
                         <div class="form-group">
-                            <label for="siteOperator">Operator*</label>
-                            <input v-model="receive_station.operator" type="text" class="form-control" id="siteOperator" required placeholder="e.g. 'DB4ZJO'">
+                            <label for="receiveStationOperator">Operator*</label>
+                            <input v-model="new_receive_station.operator" type="text" class="form-control" id="receiveStationOperator" required placeholder="e.g. 'DB4ZJO'">
                         </div>
                         <div class="form-group">
-                            <label for="siteLocation">Location*</label>
+                            <label for="receiveStationLocationLat">Location*</label>
                             <div class="row">
                                 <div class="col">
-                                    <input v-model="receive_station.lat" type="text" class="form-control" id="siteLocationLat" required placeholder="Latitude e.g. '51.1234'">
+                                    <input v-model="new_receive_station.lat" type="text" class="form-control" id="receiveStationLocationLat" required placeholder="Latitude e.g. '51.1234'">
                                 </div>
                                 <div class="col">
-                                    <input v-model="receive_station.long" type="text" class="form-control" id="siteLocationLon" required placeholder="Longitude e.g. '7.5678'">
+                                    <input v-model="new_receive_station.long" type="text" class="form-control" id="receiveStationLocationLon" required placeholder="Longitude e.g. '7.5678'">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="siteAltASL">Elevation</label>
-                            <input v-model="receive_station.elevation" type="text" class="form-control" id="siteAltASL" placeholder="above sea level [m] e.g. '580'">
+                            <label for="receiveStationAltASL">Elevation</label>
+                            <input v-model="new_receive_station.elevation" type="text" class="form-control" id="receiveStationAltASL" placeholder="above sea level [m] e.g. '580'">
                         </div>
                         <div class="form-group">
-                            <label for="siteAltAGL">Antenna Height</label>
-                            <input v-model="receive_station.antenna_height" type="text" class="form-control" id="siteAltAGL" placeholder="above ground level [m] e.g. '34'">
+                            <label for="receiveStationAltAGL">Antenna Height</label>
+                            <input v-model="new_receive_station.antenna_height" type="text" class="form-control" id="receiveStationAltAGL" placeholder="above ground level [m] e.g. '34'">
                         </div>
                         <div class="form-group">
-                            <label for="siteAntenna">Antenna Type</label>
-                            <input v-model="receive_station.antenna_type" type="text" class="form-control" id="siteAntenna" placeholder="e.g. 'Diamond X30'">
+                            <label for="receiveStationAntenna">Antenna Type</label>
+                            <input v-model="new_receive_station.antenna_type" type="text" class="form-control" id="receiveStationAntenna" placeholder="e.g. 'Diamond X30'">
                         </div>
                         <div class="form-group">
-                            <label for="siteProcessingSystem">Processing System Type</label>
-                            <input v-model="receive_station.processing_system_type" type="text" class="form-control" id="siteProcessingSystem" placeholder="e.g. 'Raspberry Pi 4 4GB + 3 NESDR Smart'">
+                            <label for="receiveStationProcessingSystem">Processing System Type</label>
+                            <input v-model="new_receive_station.processing_system_type" type="text" class="form-control" id="receiveStationProcessingSystem" placeholder="e.g. 'Raspberry Pi 4 4GB + 3 NESDR Smart'">
                         </div>
                         <div class="form-group">
-                            <label for="siteConcurrentReceivers">Number of concurrent Receivers</label>
-                            <input v-model="receive_station.concurrent_receivers" type="text" class="form-control" id="siteConcurrentReceivers" placeholder="e.g. '24'">
+                            <label for="receiveStationConcurrentReceivers">Number of concurrent Receivers</label>
+                            <input v-model="new_receive_station.concurrent_receivers" type="text" class="form-control" id="receiveStationConcurrentReceivers" placeholder="e.g. '24'">
                         </div>
                         <div class="form-group">
-                            <label for="siteReport">Reporting to</label>
-                            <select v-model="receive_station.reporting_to" class="selectpicker form-control" multiple data-live-search="true">
+                            <label for="receiveStationReport">Reporting to</label>
+                            <select v-model="new_receive_station.reporting_to" id="receiveStationReport" class="selectpicker form-control" multiple data-live-search="true">
                                 <option>aprs.fi</option>
                                 <option>sondehub.org</option>
                                 <option>radiosondy.info</option>
@@ -324,14 +324,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="siteEMail">Your E-Mail*</label>
-                            <input v-model="proposal.email" type="email" class="form-control" id="siteEMail" required placeholder="E-Mail Address">
-                            <small id="siteEMailHelp" class="form-text text-muted">Your E-Mail is only used to sent you information whether your proposal was accepted</small>
+                            <label for="receiveStationEMail">Your E-Mail*</label>
+                            <input v-model="proposal.email" type="email" class="form-control" id="receiveStationEMail" required placeholder="E-Mail Address">
+                            <small id="receiveStationEMailHelp" class="form-text text-muted">Your E-Mail is only used to sent you information whether your proposal was accepted</small>
                         </div>
                         <div class="form-group">
-                            <label for="siteComment">Your Comment</label>
-                            <textarea v-model="proposal.comment" class="form-control" id="siteComment" rows="3" placeholder="Additional Information or Sources; Proof of consent if you are not signing up yourself!"></textarea>
-                            <small id="siteCommentHelp" class="form-text text-muted">Comments are only sent to the administrator who reviews your request</small>
+                            <label for="receiveStationComment">Your Comment</label>
+                            <textarea v-model="proposal.comment" class="form-control" id="receiveStationComment" rows="3" placeholder="Additional Information or Sources; Proof of consent if you are not signing up yourself!"></textarea>
+                            <small id="receiveStationCommentHelp" class="form-text text-muted">Comments are only sent to the administrator who reviews your request</small>
                         </div>
                     </form>
                 </div>
@@ -353,70 +353,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form v-on:submit.prevent="proposeReceiveStation()" ref="receive_station_proposal">
-                        <div class="form-group">
-                            <label for="siteName">Name*</label>
-                            <input v-model="receive_station.name" type="text" class="form-control" id="siteName" required placeholder="e.g. 'DB4ZJO-11'">
-                        </div>
-                        <div class="form-group">
-                            <label for="siteOperator">Operator*</label>
-                            <input v-model="receive_station.operator" type="text" class="form-control" id="siteOperator" required placeholder="e.g. 'DB4ZJO'">
-                        </div>
-                        <div class="form-group">
-                            <label for="siteLocation">Location*</label>
-                            <div class="row">
-                                <div class="col">
-                                    <input v-model="receive_station.lat" type="number" class="form-control" id="siteLocationLat" required placeholder="Latitude e.g. '51.1234'">
-                                </div>
-                                <div class="col">
-                                    <input v-model="receive_station.long" type="number" class="form-control" id="siteLocationLon" required placeholder="Longitude e.g. '7.5678'">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="siteAltASL">Elevation</label>
-                            <input v-model="receive_station.elevation" type="number" class="form-control" id="siteAltASL" placeholder="above sea level [m] e.g. '580'">
-                        </div>
-                        <div class="form-group">
-                            <label for="siteAltAGL">Antenna Height</label>
-                            <input v-model="receive_station.antenna_height" type="number" class="form-control" id="siteAltAGL" placeholder="above ground level [m] e.g. '34'">
-                        </div>
-                        <div class="form-group">
-                            <label for="siteAntenna">Antenna Type</label>
-                            <input v-model="receive_station.antenna_type" type="text" class="form-control" id="siteAntenna" placeholder="e.g. 'Diamond X30'">
-                        </div>
-                        <div class="form-group">
-                            <label for="siteProcessingSystem">Processing System Type</label>
-                            <input v-model="receive_station.processing_system_type" type="text" class="form-control" id="siteProcessingSystem" placeholder="e.g. 'Raspberry Pi 4 4GB + 3 NESDR Smart'">
-                        </div>
-                        <div class="form-group">
-                            <label for="siteConcurrentReceivers">Number of concurrent Receivers</label>
-                            <input v-model="receive_station.concurrent_receivers" type="number" class="form-control" id="siteConcurrentReceivers" placeholder="e.g. '24'">
-                        </div>
-                        <div class="form-group">
-                            <label for="siteReport">Reporting to</label>
-                            <select v-model="receive_station.reporting_to" class="selectpicker form-control" multiple data-live-search="true">
-                                <option>aprs.fi</option>
-                                <option>sondehub.org</option>
-                                <option>radiosondy.info</option>
-                                <option>wetterson.de</option>
-                                <option>proprietary site</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="siteEMail">Your E-Mail*</label>
-                            <input v-model="proposal.email" type="email" class="form-control" id="siteEMail" required placeholder="E-Mail Address">
-                            <small id="siteEMailHelp" class="form-text text-muted">Your E-Mail is only used to sent you information whether your proposal was accepted</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="siteComment">Your Comment</label>
-                            <textarea v-model="proposal.comment" class="form-control" id="siteComment" rows="3" placeholder="Additional Information or Sources; Proof of consent if you are not signing up yourself!"></textarea>
-                            <small id="siteCommentHelp" class="form-text text-muted">Comments are only sent to the administrator who reviews your request</small>
-                        </div>
+                    <form v-on:submit.prevent="proposeHunter()" ref="hunter_proposal">
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button v-on:click="proposeReceiveStation()" type="button" class="btn btn-success">Propose Addition/Edit</button>
+                    <button v-on:click="proposeHunter()" type="button" class="btn btn-success">Propose Addition/Edit</button>
                 </div>
             </div>
         </div>
