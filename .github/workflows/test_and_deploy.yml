@@ -41,7 +41,7 @@ jobs:
         echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
         rsync -rav --delete --exclude-from '.deploy_excludes.txt' ./ ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }}:${{ secrets.PRODUCTION_PATH }}
     - name: Migrate DB on server
-      run: ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan migrate --force"
+      run: ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan migrate:fresh --seed --force"
     - name: Optimizations
       run: |
         ssh -p22 ${{ secrets.PRODUCTION_USER }}@${{ secrets.PRODUCTION_HOST }} "cd ${{ secrets.PRODUCTION_PATH }} && /opt/plesk/php/7.3/bin/php artisan clear-compiled"
