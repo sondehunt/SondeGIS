@@ -1,0 +1,12 @@
+{
+  "name": "DB4ZJO-11",
+  "operator": "DB4ZJO",
+  "latitude": "51.123",
+  "longitude": "7.456",
+  "elevation": "253",
+  "antenna-height": "34",
+  "antenna-type": "Diamond X30",
+  "processing-system-type": "Raspberry Pi 4GB + 3 NESDR Smart",
+  "concurrent-receivers": "24",
+  "reporting-to": ["radiosondy.info", "wetterson.de"]
+}

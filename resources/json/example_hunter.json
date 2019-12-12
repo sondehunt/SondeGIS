@@ -1,0 +1,8 @@
+{
+  "name": "bazingaJojo",
+  "latitude": "51.123",
+  "longitude": "7.456",
+  "radius": "50",
+  "activity": "0.4",
+  "contact": {"telegram": "@bazjo", "twitter": "@bazjo73", "callsign": "DB4ZJO"}
+}
