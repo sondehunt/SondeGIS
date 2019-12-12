@@ -431,7 +431,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 <script type="text/javascript">
-  window.api_url="{{env('APP_URL')}}/api";
+  window.api_url="{{ env('APP_URL') }}/api";
 </script>
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
