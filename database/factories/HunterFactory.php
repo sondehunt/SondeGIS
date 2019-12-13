@@ -1,16 +1,18 @@
 <?php
 
-use App\ReceiveStation;
+use App\Hunter;
+use App\LaunchSite;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
 /** @var Factory $factory */
-$factory->define(ReceiveStation::class, static function (Faker $faker) {
+$factory->define(Hunter::class, static function (Faker $faker) {
     return [
         'approved_at' => now(),
         'name' => $faker->company,
-        'operator' => $faker->name,
         'latitude' => $faker->latitude,
         'longitude' => $faker->longitude,
+        'radius' => $faker->numberBetween(20, 100),
+        'activity' => $faker->randomFloat(null, 0, 1),
     ];
 });

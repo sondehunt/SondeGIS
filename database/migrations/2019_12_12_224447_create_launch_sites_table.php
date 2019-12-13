@@ -27,8 +27,8 @@ class CreateLaunchSitesTable extends Migration
             $table->string('name');
             $table->string('operator');
             $table->integer('wmo-id')->nullable();
-            $table->double('lat')->nullable();
-            $table->double('long')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->double('elevation')->nullable();
             $table->json('launch')->nullable();
         });

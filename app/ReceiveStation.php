@@ -68,8 +68,8 @@ class ReceiveStation extends Model
     protected $fillable = [
         'name',
         'operator',
-        'lat',
-        'long',
+        'latitude',
+        'longitude',
         'elevation',
         'antenna_height',
         'antenna_type',

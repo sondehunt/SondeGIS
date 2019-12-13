@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 
 use App\LaunchSite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class LaunchSiteController extends Controller
 {
     public function index()
     {
-        return LaunchSite::approved()->get();
+        $a = LaunchSite::approved()->get();
+        Log::debug('ok');
+        return $a;
     }
 
     public function store(Request $request)
     {
-        $receive_station = new LaunchSite($request->get('launch_site'));
-        $receive_station->proposal_email = $request->get('proposal')['email'];
-        $receive_station->proposal_comment = $request->get('proposal')['comment'];
-        $receive_station->makeApproveToken();
-        $receive_station->save();
+        $launchSite = new LaunchSite($request->get('launch_site'));
+        $launchSite->proposal_email = $request->get('proposal')['email'];
+        $launchSite->proposal_comment = $request->get('proposal')['comment'];
+        $launchSite->makeApproveToken();
+        $launchSite->save();
         return response()->json();
     }
 

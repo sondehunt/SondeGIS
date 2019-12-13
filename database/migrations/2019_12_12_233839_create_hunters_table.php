@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReceiveStationsTable extends Migration
+class CreateHuntersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateReceiveStationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('receive_stations', function (Blueprint $table) {
+        Schema::create('hunters', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('base_id')->nullable();
             $table->timestamps();
@@ -25,18 +25,11 @@ class CreateReceiveStationsTable extends Migration
             $table->text('proposal_comment')->nullable();
 
             $table->string('name');
-            $table->string('operator');
             $table->double('latitude');
             $table->double('longitude');
-            $table->double('elevation')->nullable();
-            $table->double('antenna_height')->nullable();
-            $table->string('antenna_type')->nullable();
-            $table->string('processing_system_type')->nullable();
-            $table->integer('concurrent_receivers')->nullable();
-            $table->json('reporting_to')->nullable();
-
-            $table->foreign('approve_token_id')->references('id')->on('approve_tokens');
-            $table->foreign('base_id')->references('id')->on('receive_stations');
+            $table->double('radius');
+            $table->double('activity');
+            $table->json('contact')->nullable();
         });
     }
 
@@ -47,6 +40,6 @@ class CreateReceiveStationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('launch_sites');
+        Schema::dropIfExists('hunters');
     }
 }

@@ -65,6 +65,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\LaunchSite withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\LaunchSite withoutTrashed()
  * @mixin \Eloquent
+ * @property int|null $wmo-id
+ * @property array|null $launch
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\LaunchSite whereLaunch($value)
  */
 class LaunchSite extends Model
 {
@@ -75,8 +78,8 @@ class LaunchSite extends Model
         'name',
         'operator',
         'wmo-id',
-        'lat',
-        'long',
+        'latitude',
+        'longitude',
         'elevation',
         'launch',
     ];

@@ -21,6 +21,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ApproveToken whereToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ApproveToken whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ReceiveStation[] $receive_stations
+ * @property-read int|null $receive_stations_count
  */
 class ApproveToken extends Model
 {
@@ -33,8 +35,18 @@ class ApproveToken extends Model
         return Str::random(256);
     }
 
-    public function receive_stations() : HasMany
+    public function receiveStations() : HasMany
     {
         return $this->hasMany(ReceiveStation::class);
+    }
+
+    public function launchSites() : HasMany
+    {
+        return $this->hasMany(LaunchSite::class);
+    }
+
+    public function hunters() : HasMany
+    {
+        return $this->hasMany(Hunter::class);
     }
 }
