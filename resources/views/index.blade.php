@@ -56,7 +56,9 @@
                     <input type="radio" name="view" autocomplete="off" checked> Launch Sites
                 </label>
                 <label v-on:click="view='receive_stations'" class="btn btn-outline-info">
-                    <input type="radio" name="view" autocomplete="off"> Receive Stations
+                    <input type="radio" name="view" autocomplete="off">
+                    Receive Stations
+                    <span v-if="receive_stations_loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                 </label>
                 <label v-on:click="view='hunters'" class="btn btn-outline-secondary">
                     <input type="radio" name="view" autocomplete="off"> Hunters

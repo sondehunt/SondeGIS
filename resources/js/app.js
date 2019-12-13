@@ -9,9 +9,12 @@ let app = new Vue({
             popupAnchor: [0, -5]
         }),
         view: 'launch_sites',
+        layer_main: null,
+        layer_receive_stations: null,
         launch_sites: [],
         new_launch_site: {},
         receive_stations: [],
+        receive_stations_loading: true,
         new_receive_station: {
             name: '',
             operator: '',
@@ -59,26 +62,35 @@ let app = new Vue({
             $('select').selectpicker()
         },
         initMap () {
-            this.map = L.map('map', { zoomControl: false }).setView([51.163361, 10.447683], 5)
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                'attribution': '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors',
-                'useCache': true
-            }).addTo(this.map)
-        }
+            this.map = L.map('map', { zoomControl: false })
+            this.map.setView([51.163361, 10.447683], 5)
+            this.layer_main = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors',
+                useCache: true,
+                minZoom: 5,
+                maxZoom: 19,
+            })
+            this.map.addLayer(this.layer_main)
+        },
     },
     mounted () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.map.setView(new L.LatLng(position.coords.latitude, position.coords.longitude), 7)
+            })
+        }
         this.initSelects()
         this.initMap()
         this.loadReceiveStations()
 
         // test
-        L.circle([51, 7.5], { radius: 30000, opacity: 0.5, fillOpacity: 0.05 }).addTo(this.map)
+        //L.circle([51, 7.5], { radius: 30000, opacity: 0.5, fillOpacity: 0.05 }).addTo(this.map)
     },
     watch: {
         receive_stations: {
             deep: true,
             handler () {
+                let receiveStationMarkers = []
                 this.receive_stations.forEach((receiveStation) => {
                     let popupContent = '<b>' + receiveStation.name + '</b><br><table>'
                     for (let prop in receiveStation) {
@@ -90,10 +102,13 @@ let app = new Vue({
                         }
                     }
                     popupContent += '</table>'
-                    L.marker([receiveStation.lat, receiveStation.long], {
+                    receiveStationMarkers.push(L.marker([receiveStation.lat, receiveStation.long], {
                         icon: this.point_icon
-                    }).addTo(this.map).bindPopup(popupContent)
+                    }).addTo(this.map).bindPopup(popupContent))
                 })
+                this.layer_receive_stations = L.layerGroup(receiveStationMarkers)
+                this.map.addLayer(this.layer_receive_stations)
+                this.receive_stations_loading = false
             }
         }
     }
