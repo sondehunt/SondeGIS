@@ -23,20 +23,14 @@ trait MustBeApproved
         $builder = static::query();
         $from = $this->getTable();
         return $builder
-            ->where('id', '=', function (\Illuminate\Database\Query\Builder $query) use ($from) {
-                $query
-                    ->selectRaw('max(id)')
-                    ->from($from, 'r')
-                    ->whereNotNull($from . '.approved_at')
-                    ->where($from . '.approved_at', '=',
-                        static function (\Illuminate\Database\Query\Builder $query) use ($from) {
-                            $query
-                                ->selectRaw('max(r2.approved_at)')
-                                ->from($from, 'r2')
-                                ->whereRaw('coalesce(r2.base_id, r2.id) = coalesce(r.base_id, r.id)');
-                        })
-                    ->whereRaw('coalesce(r.base_id, r.id) = coalesce(' . $from . '.base_id, ' . $from . '.id)');
-            });
+            ->whereNotNull($from . '.approved_at')
+            ->where($from . '.approved_at', '=',
+                static function (\Illuminate\Database\Query\Builder $query) use ($from) {
+                    $query
+                        ->selectRaw('max(r2.approved_at)')
+                        ->from($from, 'r2')
+                        ->whereRaw('coalesce(r2.base_id, r2.id) = coalesce(' . $from . '.base_id, ' . $from . '.id)');
+                });
     }
 
     public static function findBase(int $id)
