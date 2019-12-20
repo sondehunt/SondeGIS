@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Hunter;
 use App\Mail\HunterProposal;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Mail;
 
 class HunterController extends Controller
 {
@@ -33,6 +33,7 @@ class HunterController extends Controller
         $proposal->makeApproveToken();
         $proposal->base()->associate($hunter);
         $proposal->save();
+        Mail::send(new HunterProposal($proposal), []);
         return response()->json();
     }
 }

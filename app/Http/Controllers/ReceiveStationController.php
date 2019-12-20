@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReceiveStationProposal;
 use App\ReceiveStation;
 use Illuminate\Http\Request;
+use Mail;
 
 class ReceiveStationController extends Controller
 {
@@ -19,6 +21,7 @@ class ReceiveStationController extends Controller
         $receive_station->proposal_comment = $request->get('proposal')['comment'];
         $receive_station->makeApproveToken();
         $receive_station->save();
+        Mail::send(new ReceiveStationProposal($receive_station), []);
         return response()->json();
     }
 
@@ -30,6 +33,7 @@ class ReceiveStationController extends Controller
         $proposal->makeApproveToken();
         $proposal->base()->associate($receive_station);
         $proposal->save();
+        Mail::send(new ReceiveStationProposal($proposal), []);
         return response()->json();
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\LaunchSite;
+use App\Mail\LaunchSiteProposal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Mail;
 
 class LaunchSiteController extends Controller
 {
@@ -22,6 +24,7 @@ class LaunchSiteController extends Controller
         $launchSite->proposal_comment = $request->get('proposal')['comment'];
         $launchSite->makeApproveToken();
         $launchSite->save();
+        Mail::send(new LaunchSiteProposal($launchSite), []);
         return response()->json();
     }
 
@@ -33,6 +36,7 @@ class LaunchSiteController extends Controller
         $proposal->makeApproveToken();
         $proposal->base()->associate($launchSite);
         $proposal->save();
+        Mail::send(new LaunchSiteProposal($proposal), []);
         return response()->json();
     }
 }
