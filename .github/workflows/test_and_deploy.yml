@@ -23,7 +23,7 @@ jobs:
 #        DB_DATABASE: database/database.sqlite
 #      run: vendor/bin/phpunit
   laravel-deploy:
-    needs: laravel-tests
+    #needs: laravel-tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1.1.0
