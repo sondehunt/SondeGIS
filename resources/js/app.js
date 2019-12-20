@@ -136,7 +136,7 @@ let app = new Vue({
             handler () {
                 let launchSitesMarkers = []
                 this.launch_sites.forEach((launchSite) => {
-                    let popupContent = '<b>' + launchSite.name + '</b><br><table>'
+                    let popupContent = '<h5 class="card-title">' + launchSite.name + '</h5><br><table>'
                     for (let prop in launchSite) {
                         if (Object.prototype.hasOwnProperty.call(launchSite, prop)) {
                             popupContent += '<tr>'
@@ -185,16 +185,11 @@ let app = new Vue({
             handler () {
                 let hunterMarkers = []
                 this.hunters.forEach((hunter) => {
-                    let popupContent = '<b>' + hunter.name + '</b><br><table>'
-                    for (let prop in hunter) {
-                        if (Object.prototype.hasOwnProperty.call(hunter, prop)) {
-                            popupContent += '<tr>'
-                            popupContent += '<td style="text-align: right;">' + prop + '</td>'
-                            popupContent += '<td><strong>' + hunter[prop] + '</strong></td>'
-                            popupContent += '</tr>'
-                        }
-                    }
-                    popupContent += '</table>'
+                    let popupContent = '<h5 class="card-title">' + hunter.name + '</h5>'
+                    popupContent += '<span class="font-weight-bold text-muted">Hunting Radius</span> ' + hunter.radius + ' km<br>'
+                    popupContent += '<span class="font-weight-bold text-muted">Hunting Activity Propability</span> ' + hunter.activity.toFixed(3) + '<br>'
+                    popupContent += '<span class="font-weight-bold text-muted">Contact</span> ' + hunter.contact + '<br>'
+                    popupContent += '<a href="#" class="text-right btn btn-primary">Go somewhere</a>'
                     hunterMarkers.push(L.circle([hunter.latitude, hunter.longitude], {
                         radius: hunter.radius * 1000,
                         opacity: hunter.activity,
