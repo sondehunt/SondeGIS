@@ -304,10 +304,10 @@
                             <label for="receiveStationLocationLat">Location*</label>
                             <div class="row">
                                 <div class="col">
-                                    <input v-model="new_receive_station.lat" type="text" class="form-control" id="receiveStationLocationLat" required placeholder="Latitude e.g. '51.1234'">
+                                    <input v-model="new_receive_station.latitude" type="text" class="form-control" id="receiveStationLocationLat" required placeholder="Latitude e.g. '51.1234'">
                                 </div>
                                 <div class="col">
-                                    <input v-model="new_receive_station.long" type="text" class="form-control" id="receiveStationLocationLon" required placeholder="Longitude e.g. '7.5678'">
+                                    <input v-model="new_receive_station.longitude" type="text" class="form-control" id="receiveStationLocationLon" required placeholder="Longitude e.g. '7.5678'">
                                 </div>
                             </div>
                         </div>
@@ -341,6 +341,7 @@
                                 <option>proprietary site</option>
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label for="receiveStationEMail">Your E-Mail*</label>
                             <input v-model="proposal.email" type="email" class="form-control" id="receiveStationEMail" required placeholder="E-Mail Address">
@@ -372,6 +373,52 @@
                 </div>
                 <div class="modal-body">
                     <form v-on:submit.prevent="proposeHunter()" ref="hunter_proposal">
+                        <div class="form-group">
+                            <label for="hunterName">Name*</label>
+                            <input v-model="new_hunter.name" type="text" class="form-control" id="hunterName" required placeholder="e.g. 'Niklas'">
+                        </div>
+                        <div class="form-group">
+                            <label for="hunterLocationLat">Location*</label>
+                            <div class="row">
+                                <div class="col">
+                                    <input v-model="new_hunter.latitude" type="text" class="form-control" id="hunterLocationLat" required placeholder="Latitude e.g. '51.1234'">
+                                </div>
+                                <div class="col">
+                                    <input v-model="new_hunter.longitude" type="text" class="form-control" id="hunterLocationLon" required placeholder="Longitude e.g. '7.5678'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hunterRadius">Radius* (kilometers)</label>
+                            <input v-model="new_hunter.radius" type="number" class="form-control" id="hunterRadius" required placeholder="e.g. '50'">
+                        </div>
+                        <div class="form-group">
+                            <label for="hunterActivity">Activity*</label>
+                            <input v-model="new_hunter.activity" type="number" class="form-control" id="hunterActivity" required placeholder="e.g. '0.4'" min="0" max="1" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="hunterTelegram">Telegram</label>
+                            <input v-model="new_hunter.telegram" type="text" class="form-control" id="hunterTelegram" placeholder="e.g. '@bazjo'">
+                        </div>
+                        <div class="form-group">
+                            <label for="hunterTwitter">Twitter</label>
+                            <input v-model="new_hunter.twitter" type="text" class="form-control" id="hunterTwitter" placeholder="e.g. '@bazjo73'">
+                        </div>
+                        <div class="form-group">
+                            <label for="hunterCallsign">Callsign</label>
+                            <input v-model="new_hunter.callsign" type="text" class="form-control" id="hunterCallsign" placeholder="e.g. 'DB4ZJO'">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hunterEMail">Your E-Mail*</label>
+                            <input v-model="proposal.email" type="email" class="form-control" id="hunterEMail" required placeholder="E-Mail Address">
+                            <small id="hunterEMailHelp" class="form-text text-muted">Your E-Mail is only used to sent you information whether your proposal was accepted</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="hunterComment">Your Comment</label>
+                            <textarea v-model="proposal.comment" class="form-control" id="hunterComment" rows="3" placeholder="Additional Information or Sources; Proof of consent if you are not signing up yourself!"></textarea>
+                            <small id="hunterCommentHelp" class="form-text text-muted">Comments are only sent to the administrator who reviews your request</small>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

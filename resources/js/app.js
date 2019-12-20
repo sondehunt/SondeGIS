@@ -23,20 +23,29 @@ let app = new Vue({
         new_receive_station: {
             name: '',
             operator: '',
-            lat: null,
-            long: null,
+            latitude: null,
+            longitude: null,
             elevation: null,
             antenna_height: null,
             antenna_type: '',
             processing_system_type: '',
             concurrent_receivers: null,
-            reporting_to: []
+            reporting_to: [],
         },
-        new_hunter: {},
+        new_hunter: {
+            name: '',
+            latitude: null,
+            longitude: null,
+            radius: null,
+            activity: null,
+            telegram: '',
+            twitter: '',
+            callsign: '',
+        },
         proposal: {
             email: '',
-            comment: ''
-        }
+            comment: '',
+        },
     },
     methods: {
         loadLaunchSites () {
@@ -63,7 +72,24 @@ let app = new Vue({
             }
             fetch(window.api_url + '/receive_stations', {
                 body: JSON.stringify({
-                    receive_station: this.receive_station,
+                    receive_station: this.new_receive_station,
+                    proposal: this.proposal
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST'
+            })
+                .then(console.log)
+                .catch(console.log)
+        },
+        proposeHunter () {
+            if (!this.$refs.hunter_proposal.reportValidity()) {
+                return
+            }
+            fetch(window.api_url + '/hunters', {
+                body: JSON.stringify({
+                    hunter: this.new_hunter,
                     proposal: this.proposal
                 }),
                 headers: {
