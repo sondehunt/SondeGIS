@@ -59,6 +59,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|\App\ReceiveStation withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\ReceiveStation withoutTrashed()
  * @mixin \Eloquent
+ * @property float $latitude
+ * @property float $longitude
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereLongitude($value)
  */
 class ReceiveStation extends Model
 {

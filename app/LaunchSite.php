@@ -68,6 +68,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $wmo-id
  * @property array|null $launch
  * @method static \Illuminate\Database\Eloquent\Builder|\App\LaunchSite whereLaunch($value)
+ * @property float|null $latitude
+ * @property float|null $longitude
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\LaunchSite whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\LaunchSite whereLongitude($value)
  */
 class LaunchSite extends Model
 {

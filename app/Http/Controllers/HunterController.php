@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Hunter;
-use App\ReceiveStation;
+use App\Mail\HunterProposal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HunterController extends Controller
 {
@@ -20,6 +21,7 @@ class HunterController extends Controller
         $hunter->proposal_comment = $request->get('proposal')['comment'];
         $hunter->makeApproveToken();
         $hunter->save();
+        Mail::send(new HunterProposal($hunter), []);
         return response()->json();
     }
 

@@ -23,6 +23,11 @@ use Illuminate\Support\Str;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ReceiveStation[] $receive_stations
  * @property-read int|null $receive_stations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Hunter[] $hunters
+ * @property-read int|null $hunters_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\LaunchSite[] $launchSites
+ * @property-read int|null $launch_sites_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ReceiveStation[] $receiveStations
  */
 class ApproveToken extends Model
 {
