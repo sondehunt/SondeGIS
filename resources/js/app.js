@@ -10,11 +10,16 @@ let app = new Vue({
         }),
         view: 'launch_sites',
         layer_main: null,
+        layer_launch_sites: null,
         layer_receive_stations: null,
+        layer_hunters: null,
         launch_sites: [],
-        new_launch_site: {},
         receive_stations: [],
+        hunters: [],
+        launch_sites_loading: true,
         receive_stations_loading: true,
+        hunters_loading: true,
+        new_launch_site: {},
         new_receive_station: {
             name: '',
             operator: '',
@@ -27,7 +32,6 @@ let app = new Vue({
             concurrent_receivers: null,
             reporting_to: []
         },
-        hunters: [],
         new_hunter: {},
         proposal: {
             email: '',
@@ -35,10 +39,22 @@ let app = new Vue({
         }
     },
     methods: {
+        loadLaunchSites () {
+            fetch(window.api_url + '/launch_sites')
+                .then(response => response.json())
+                .then(launchSites => this.launch_sites = launchSites)
+                .catch(console.log)
+        },
         loadReceiveStations () {
             fetch(window.api_url + '/receive_stations')
                 .then(response => response.json())
                 .then(receiveStations => this.receive_stations = receiveStations)
+                .catch(console.log)
+        },
+        loadHunters () {
+            fetch(window.api_url + '/hunters')
+                .then(response => response.json())
+                .then(hunters => this.hunters = hunters)
                 .catch(console.log)
         },
         proposeReceiveStation () {
@@ -81,12 +97,38 @@ let app = new Vue({
         }
         this.initSelects()
         this.initMap()
+        this.loadLaunchSites()
         this.loadReceiveStations()
+        this.loadHunters()
 
         // test
         //L.circle([51, 7.5], { radius: 30000, opacity: 0.5, fillOpacity: 0.05 }).addTo(this.map)
     },
     watch: {
+        launch_sites: {
+            deep: true,
+            handler () {
+                let launchSitesMarkers = []
+                this.launch_sites.forEach((launchSite) => {
+                    let popupContent = '<b>' + launchSite.name + '</b><br><table>'
+                    for (let prop in launchSite) {
+                        if (Object.prototype.hasOwnProperty.call(launchSite, prop)) {
+                            popupContent += '<tr>'
+                            popupContent += '<td style="text-align: right;">' + prop + '</td>'
+                            popupContent += '<td><strong>' + launchSite[prop] + '</strong></td>'
+                            popupContent += '</tr>'
+                        }
+                    }
+                    popupContent += '</table>'
+                    launchSitesMarkers.push(L.marker([launchSite.latitude, launchSite.longitude], {
+                        icon: this.point_icon
+                    }).addTo(this.map).bindPopup(popupContent))
+                })
+                this.layer_launch_sites = L.layerGroup(launchSitesMarkers)
+                this.map.addLayer(this.layer_launch_sites)
+                this.launch_sites_loading = false
+            }
+        },
         receive_stations: {
             deep: true,
             handler () {
@@ -108,7 +150,62 @@ let app = new Vue({
                 })
                 this.layer_receive_stations = L.layerGroup(receiveStationMarkers)
                 this.map.addLayer(this.layer_receive_stations)
+                this.layer_receive_stations.removeFrom(this.map)
                 this.receive_stations_loading = false
+            }
+        },
+        hunters: {
+            deep: true,
+            handler () {
+                let hunterMarkers = []
+                this.hunters.forEach((hunter) => {
+                    let popupContent = '<b>' + hunter.name + '</b><br><table>'
+                    for (let prop in hunter) {
+                        if (Object.prototype.hasOwnProperty.call(hunter, prop)) {
+                            popupContent += '<tr>'
+                            popupContent += '<td style="text-align: right;">' + prop + '</td>'
+                            popupContent += '<td><strong>' + hunter[prop] + '</strong></td>'
+                            popupContent += '</tr>'
+                        }
+                    }
+                    popupContent += '</table>'
+                    hunterMarkers.push(L.circle([hunter.latitude, hunter.longitude], {
+                        radius: hunter.radius * 1000,
+                        opacity: hunter.activity,
+                        fillOpacity: 0.05,
+                    }).addTo(this.map).bindPopup(popupContent))
+                })
+                this.layer_hunters = L.layerGroup(hunterMarkers)
+                this.map.addLayer(this.layer_hunters)
+                this.layer_hunters.removeFrom(this.map)
+                this.hunters_loading = false
+            }
+        },
+        view: {
+            handler (value) {
+                if (this.launch_sites_loading === false) {
+                    this.layer_launch_sites.removeFrom(this.map)
+                }
+                if (this.receive_stations_loading === false) {
+                    this.layer_receive_stations.removeFrom(this.map)
+                }
+                if (this.hunters_loading === false) {
+                    this.layer_hunters.removeFrom(this.map)
+                }
+
+                switch (value) {
+                    case 'launch_sites':
+                        this.layer_launch_sites.addTo(this.map)
+                        break
+                    case 'receive_stations':
+                        this.layer_receive_stations.addTo(this.map)
+                        break
+                    case 'hunters':
+                        this.layer_hunters.addTo(this.map)
+                        break
+                    default:
+                        break
+                }
             }
         }
     }

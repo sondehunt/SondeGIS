@@ -53,7 +53,9 @@
         <div class="overlay card mt-3 ml-3" style="z-index: 501;">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label v-on:click="view='launch_sites'" class="btn btn-outline-primary active">
-                    <input type="radio" name="view" autocomplete="off" checked> Launch Sites
+                    <input type="radio" name="view" autocomplete="off" checked>
+                    Launch Sites
+                    <span v-if="launch_sites_loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                 </label>
                 <label v-on:click="view='receive_stations'" class="btn btn-outline-info">
                     <input type="radio" name="view" autocomplete="off">
@@ -61,7 +63,9 @@
                     <span v-if="receive_stations_loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                 </label>
                 <label v-on:click="view='hunters'" class="btn btn-outline-secondary">
-                    <input type="radio" name="view" autocomplete="off"> Hunters
+                    <input type="radio" name="view" autocomplete="off">
+                    Hunters
+                    <span v-if="hunters_loading" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                 </label>
             </div>
         </div>
