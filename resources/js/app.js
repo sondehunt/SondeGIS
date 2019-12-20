@@ -102,7 +102,7 @@ let app = new Vue({
                         }
                     }
                     popupContent += '</table>'
-                    receiveStationMarkers.push(L.marker([receiveStation.lat, receiveStation.long], {
+                    receiveStationMarkers.push(L.marker([receiveStation.latitude, receiveStation.longitude], {
                         icon: this.point_icon
                     }).addTo(this.map).bindPopup(popupContent))
                 })
