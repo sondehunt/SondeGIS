@@ -31,7 +31,7 @@ html, body, #app, #map {
 }
 
 .leaflet-container a.leaflet-popup-close-button {
-    color: #000;
+    color: black;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 700;
@@ -40,6 +40,11 @@ html, body, #app, #map {
     opacity: .5;
     padding: 8px 8px 0 0;
     width: auto;
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
+    color: black;
+    opacity: 1;
 }
 
 .leaflet-popup-content {
@@ -51,6 +56,13 @@ html, body, #app, #map {
     margin: 0;
     padding: 1.25rem;
     text-align: left;
+    width: 500px !important;
+}
+
+@media (max-width: 500px) {
+    .leaflet-popup-content {
+        width: 300px !important;
+    }
 }
 
 .leaflet-container a.btn {

@@ -164,16 +164,33 @@ let app = new Vue({
             handler () {
                 let receiveStationMarkers = []
                 this.receive_stations.forEach((receiveStation) => {
-                    let popupContent = '<b>' + receiveStation.name + '</b><br><table>'
-                    for (let prop in receiveStation) {
-                        if (Object.prototype.hasOwnProperty.call(receiveStation, prop)) {
-                            popupContent += '<tr>'
-                            popupContent += '<td style="text-align: right;">' + prop + '</td>'
-                            popupContent += '<td><strong>' + receiveStation[prop] + '</strong></td>'
-                            popupContent += '</tr>'
+                    let popupContent = '<h5 class="card-title">' + receiveStation.name + '</h5>'
+                    if (receiveStation.operator) {
+                        popupContent += '<span class="font-weight-bold text-muted">Operator</span> ' + receiveStation.operator + '<br>'
+                    }
+                    if (receiveStation.elevation) {
+                        popupContent += '<span class="font-weight-bold text-muted">Elevation</span> ' + receiveStation.elevation + ' m<br>'
+                    }
+                    if (receiveStation.antenna_height) {
+                        popupContent += '<span class="font-weight-bold text-muted">Antenna Height</span> ' + receiveStation.antenna_height + ' m<br>'
+                    }
+                    if (receiveStation.antenna_type) {
+                        popupContent += '<span class="font-weight-bold text-muted">Antenna Type</span><br>' + receiveStation.antenna_type + '<br>'
+                    }
+                    if (receiveStation.processing_system_type) {
+                        popupContent += '<span class="font-weight-bold text-muted">Processing System Type</span><br>' + receiveStation.processing_system_type + '<br>'
+                    }
+                    if (receiveStation.concurrent_receivers) {
+                        popupContent += '<span class="font-weight-bold text-muted">Concurrent Receivers</span> ' + receiveStation.concurrent_receivers + '<br>'
+                    }
+                    if (receiveStation.reporting_to) {
+                        popupContent += '<span class="font-weight-bold text-muted">Reporting To</span><br>'
+                        for (let report of receiveStation.reporting_to) {
+                            popupContent += '<span class="badge badge-info mr-1">' + report + '</span>'
                         }
                     }
-                    popupContent += '</table>'
+                    popupContent += '<a href="javascript:void(0)" class="btn btn-primary mt-1">Edit</a>'
+                    popupContent += '<div style="clear: both;">'
                     receiveStationMarkers.push(L.marker([receiveStation.latitude, receiveStation.longitude], {
                         icon: this.point_icon
                     }).addTo(this.map).bindPopup(popupContent))
@@ -190,8 +207,12 @@ let app = new Vue({
                 let hunterMarkers = []
                 this.hunters.forEach((hunter) => {
                     let popupContent = '<h5 class="card-title">' + hunter.name + '</h5>'
-                    popupContent += '<span class="font-weight-bold text-muted">Hunting Radius</span> ' + hunter.radius + ' km<br>'
-                    popupContent += '<span class="font-weight-bold text-muted">Hunting Activity Propability</span> ' + Math.floor(hunter.activity * 100) + ' %<br>'
+                    if (hunter.radius) {
+                        popupContent += '<span class="font-weight-bold text-muted">Hunting Radius</span> ' + hunter.radius + ' km<br>'
+                    }
+                    if (hunter.activity) {
+                        popupContent += '<span class="font-weight-bold text-muted">Hunting Activity Propability</span> ' + Math.floor(hunter.activity * 100) + ' %<br>'
+                    }
                     if (hunter.contact) {
                         popupContent += '<span class="font-weight-bold text-muted">Contact</span><br>'
                         for (let contactType in hunter.contact) {
