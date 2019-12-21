@@ -204,59 +204,102 @@
                             <input type="text" class="form-control" id="launchSiteAltASL" placeholder="above sea level [m] e.g. '580'">
                         </div>
                         <!--LAUNCHES-->
-                        <h4>Launch</h4>
-                        <div class="form-group">
-                            <label for="siteReport">Type</label>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="siteLaunchType" id="launchSiteLaunchTypeOperational">
-                                <label class="custom-control-label" for="launchSiteLaunchTypeOperational">operational</label>
+                        <div class="accordion" id="accordionExample">
+                          <div class="card">
+                            <div class="card-header" id="headingOne">
+                              <h5 class="mb-0">
+                                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Toggle View Launch #1
+                                </button>
+                                <button class="btn btn-danger" type="button">Delete</button>
+                              </h5>
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" name="siteLaunchType" id="launchSiteLaunchTypeSporadic">
-                                <label class="custom-control-label" for="launchSiteLaunchTypeSporadic">sporadic</label>
-                            </div>
-                        </div>
-                        <h5>Schedule</h5>
 
-                        <div class="form-group">
-                            <label for="launchSiteFreqPrim">Primary Frequency</label>
-                            <input type="text" class="form-control" id="launchSiteFreqPrim" placeholder="e.g. '405.3'">
-                        </div>
-                        <div class="form-group">
-                            <label for="launchSiteFreqSec">Secondary Frequencies</label>
-                            <input type="text" class="form-control" id="launchSiteFreqSec" placeholder="e.g. '405.3'">
-                            <button class="btn btn-success">+</button>
-                            <button class="btn btn-danger">-</button>
-                        </div>
-                        <h5>Sonde</h5>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                              <div class="card-body">
+                                <h4>Launch</h4>
+                                <div class="form-group">
+                                    <label for="siteReport">Type</label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" name="siteLaunchType" id="launchSiteLaunchTypeOperational">
+                                        <label class="custom-control-label" for="launchSiteLaunchTypeOperational">operational</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" name="siteLaunchType" id="launchSiteLaunchTypeSporadic">
+                                        <label class="custom-control-label" for="launchSiteLaunchTypeSporadic">sporadic</label>
+                                    </div>
+                                </div>
+                                <h5>Schedule</h5>
+                                <div class="accordion" id="accordionExample2">
+                                  <div class="card">
+                                    <div class="card-header" id="headingOne2">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
+                                          Toggle View Schedule #1
+                                        </button>
+                                        <button class="btn btn-danger" type="button">Delete</button>
+                                      </h5>
+                                    </div>
 
-                        <div class="form-group">
-                            <label for="launchSiteLaunchBallon">Ballon</label>
-                            <select id="launchSiteLaunchBallon" class="form-control">
-                                <option>red, 100g</option>
-                                <option>white, 600g</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="siteLaunchGas">Gas</label>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="siteLaunchGas" id="launchSiteLaunchGasHydrogen">
-                                <label class="custom-control-label" for="launchSiteLaunchGasHydrogen">hydrogen</label>
+                                    <div id="collapseOne2" class="collapse show" aria-labelledby="headingOne2" data-parent="#accordionExample2">
+                                      <div class="card-body">
+                                        Test
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-success collapsed" type="button" data-toggle="collapse" data-target="#collapseThree2" aria-expanded="false" aria-controls="collapseThree2">
+                                          Add new Schedule
+                                        </button>
+                                      </h5>
+                                    </div>
+                                  </div>
+                                </div>
+                                <h5 class="mt-3">Sonde</h5>
+
+                                <div class="form-group">
+                                    <label for="launchSiteLaunchBallon">Ballon</label>
+                                    <select id="launchSiteLaunchBallon" class="form-control">
+                                        <option>red, 100g</option>
+                                        <option>white, 600g</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="siteLaunchGas">Gas</label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" name="siteLaunchGas" id="launchSiteLaunchGasHydrogen">
+                                        <label class="custom-control-label" for="launchSiteLaunchGasHydrogen">hydrogen</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" name="siteLaunchGas" id="launchSiteLaunchGasHelium">
+                                        <label class="custom-control-label" for="launchSiteLaunchGasHelium">helium</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="launchSiteLaunch>Parachute">Parachute</label>
+                                    <select id="launchSiteLaunch>Parachute" class="form-control">
+                                        <option>white, 60cm, inside ballon</option>
+                                        <option>white, 40cm, inside ballon</option>
+                                        <option>none</option>
+                                    </select>
+                                </div>
+                              </div>
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" name="siteLaunchGas" id="launchSiteLaunchGasHelium">
-                                <label class="custom-control-label" for="launchSiteLaunchGasHelium">helium</label>
-                            </div>
+                          </div>
+                          <div class="card">
+                          <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                              <button class="btn btn-success collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Add new Launch
+                              </button>
+                            </h5>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label for="launchSiteLaunch>Parachute">Parachute</label>
-                            <select id="launchSiteLaunch>Parachute" class="form-control">
-                                <option>white, 60cm, inside ballon</option>
-                                <option>white, 40cm, inside ballon</option>
-                                <option>none</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
+                      </div>
+
+                        <div class="form-group mt-3">
                             <label for="launchSiteAnnotations">Annotations</label>
                             <input type="text" class="form-control" id="launchSiteAnnotations" placeholder="e.g. 'sporadic additional launches at 06Z/18Z'">
                         </div>
