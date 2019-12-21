@@ -175,7 +175,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form v-on:submit.prevent="proposeLaunchSite()" ref="launch_station_proposal">
                         <div class="form-group">
                             <label for="launchSiteName">Name*</label>
                             <input type="text" class="form-control" id="launchSiteName" required placeholder="e.g. 'Essen-Bredney'">
@@ -317,7 +317,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Propose Addition/Edit</button>
+                    <button v-on:click="proposeLaunchSite()" type="button" class="btn btn-success">Propose Addition/Edit</button>
                 </div>
             </div>
         </div>

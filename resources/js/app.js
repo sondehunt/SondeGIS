@@ -70,6 +70,12 @@ let app = new Vue({
                 .then(hunters => this.hunters = hunters)
                 .catch(console.log)
         },
+        proposeLaunchSite () {
+            if (!this.$refs.launch_station_proposal.reportValidity()) {
+                return
+            }
+            console.log('propose launch site')
+        },
         proposeReceiveStation () {
             if (!this.$refs.receive_station_proposal.reportValidity()) {
                 return
@@ -130,9 +136,6 @@ let app = new Vue({
         this.loadLaunchSites()
         this.loadReceiveStations()
         this.loadHunters()
-
-        // test
-        //L.circle([51, 7.5], { radius: 30000, opacity: 0.5, fillOpacity: 0.05 }).addTo(this.map)
     },
     watch: {
         launch_sites: {
@@ -140,16 +143,9 @@ let app = new Vue({
             handler () {
                 let launchSitesMarkers = []
                 this.launch_sites.forEach((launchSite) => {
-                    let popupContent = '<h5 class="card-title">' + launchSite.name + '</h5><br><table>'
-                    for (let prop in launchSite) {
-                        if (Object.prototype.hasOwnProperty.call(launchSite, prop)) {
-                            popupContent += '<tr>'
-                            popupContent += '<td style="text-align: right;">' + prop + '</td>'
-                            popupContent += '<td><strong>' + launchSite[prop] + '</strong></td>'
-                            popupContent += '</tr>'
-                        }
-                    }
-                    popupContent += '</table>'
+                    let popupContent = '<h5 class="card-title">' + launchSite.name + '</h5>'
+                    popupContent += '<a href="javascript:void(0)" class="btn btn-primary mt-1">Edit</a>'
+                    popupContent += '<div style="clear: both;">'
                     launchSitesMarkers.push(L.marker([launchSite.latitude, launchSite.longitude], {
                         icon: this.point_icon
                     }).addTo(this.map).bindPopup(popupContent))
