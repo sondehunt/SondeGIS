@@ -1,7 +1,6 @@
 <?php
 
 use App\Hunter;
-use App\LaunchSite;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
@@ -14,5 +13,10 @@ $factory->define(Hunter::class, static function (Faker $faker) {
         'longitude' => $faker->longitude,
         'radius' => $faker->numberBetween(20, 100),
         'activity' => $faker->randomFloat(null, 0, 1),
+        'contact' => [
+            'telegram' => $faker->userName,
+            'twitter' => $faker->userName,
+            'callsign' => $faker->userName,
+        ],
     ];
 });

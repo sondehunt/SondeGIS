@@ -1,3 +1,7 @@
+function ucFirst (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
 let app = new Vue({
     el: '#app',
     data: {
@@ -187,9 +191,26 @@ let app = new Vue({
                 this.hunters.forEach((hunter) => {
                     let popupContent = '<h5 class="card-title">' + hunter.name + '</h5>'
                     popupContent += '<span class="font-weight-bold text-muted">Hunting Radius</span> ' + hunter.radius + ' km<br>'
-                    popupContent += '<span class="font-weight-bold text-muted">Hunting Activity Propability</span> ' + hunter.activity.toFixed(3) + '<br>'
-                    popupContent += '<span class="font-weight-bold text-muted">Contact</span> ' + hunter.contact + '<br>'
-                    popupContent += '<a href="#" class="text-right btn btn-primary">Go somewhere</a>'
+                    popupContent += '<span class="font-weight-bold text-muted">Hunting Activity Propability</span> ' + Math.floor(hunter.activity * 100) + ' %<br>'
+                    if (hunter.contact) {
+                        popupContent += '<span class="font-weight-bold text-muted">Contact</span><br>'
+                        for (let contactType in hunter.contact) {
+                            let userText = ''
+                            switch (contactType) {
+                                case 'telegram':
+                                    userText = '<a href="https://t.me/' + hunter.contact[contactType] + '" target="_blank">@' + hunter.contact[contactType] + '</a>'
+                                    break
+                                case 'twitter':
+                                    userText = '<a href="https://twitter.com/' + hunter.contact[contactType] + '" target="_blank">@' + hunter.contact[contactType] + '</a>'
+                                    break
+                                default:
+                                    userText = hunter.contact[contactType]
+                            }
+                            popupContent += ucFirst(contactType) + ': ' + userText + '<br>'
+                        }
+                    }
+                    popupContent += '<a href="javascript:void(0)" class="btn btn-primary mt-1">Edit</a>'
+                    popupContent += '<div style="clear: both;">'
                     hunterMarkers.push(L.circle([hunter.latitude, hunter.longitude], {
                         radius: hunter.radius * 1000,
                         opacity: hunter.activity,

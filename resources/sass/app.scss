@@ -2,6 +2,7 @@ body {
     padding: 0;
     margin: 0;
 }
+
 html, body, #app, #map {
     height: 100%;
     width: 100%;
@@ -25,33 +26,35 @@ html, body, #app, #map {
 }
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    box-shadow: none;
+    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.3);
     border-radius: .25rem;
 }
 
-a.leaflet-popup-close-button {
-    padding: 8px 8px 0 0 !important;
-    font-size: 1rem !important;
-    font-weight: 700 !important;
-    line-height: 1 !important;
-    color: #000 !important;
-    width: auto !important;
-    height: auto !important;
+.leaflet-container a.leaflet-popup-close-button {
+    color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 700;
+    height: auto;
+    line-height: 1;
     opacity: .5;
-    font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;;
+    padding: 8px 8px 0 0;
+    width: auto;
 }
 
 .leaflet-popup-content {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    color: #212529;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
+    margin: 0;
+    padding: 1.25rem;
     text-align: left;
-    margin: 1.25rem;
-    margin-bottom: calc(1.25rem - 8px);
 }
 
-.leaflet-container.btn a {
-  color: #FFF !important;
+.leaflet-container a.btn {
+    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.3);
+    color: white;
+    float: right;
 }
