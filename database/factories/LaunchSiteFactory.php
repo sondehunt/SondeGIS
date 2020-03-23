@@ -15,6 +15,7 @@ $factory->define(
             'latitude' => $faker->latitude,
             'longitude' => $faker->longitude,
             'wmo_id' => $faker->randomNumber(5),
+            'head' => true,
         ];
     }
 );
