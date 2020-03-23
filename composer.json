@@ -1,10 +1,12 @@
 {
-    "name": "laravel/laravel",
+    "name": "sondehunt/sonde-gis",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "web based GIS for displaying and editing radiosonde launch sites, ham receiving stations and people who will hunt for radiosondes",
     "keywords": [
-        "framework",
-        "laravel"
+        "sonde",
+        "hunt",
+        "sondehunt",
+        "gis"
     ],
     "license": "MIT",
     "require": {
