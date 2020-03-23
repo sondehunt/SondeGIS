@@ -84,16 +84,22 @@ let app = new Vue({
         },
     },
     computed: {
+        filtered_launch_sites () {
+            return this.launch_sites
+        },
+        filtered_receive_stations () {
+            return this.receive_stations
+        },
         filtered_hunters () {
-            return this.hunters
+            return this.hunters.filter((hunter) => hunter.activity >= this.filters.hunters.hunting_activity / 100)
         }
     },
     watch: {
-        launch_sites: {
+        filtered_launch_sites: {
             deep: true,
             handler () {
                 let launchSitesMarkers = []
-                this.launch_sites.forEach((launchSite) => {
+                this.filtered_launch_sites.forEach((launchSite) => {
                     let popupContent = '<h5 class="card-title">' + launchSite.name + '</h5>'
                     popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
                     popupContent += '<div style="clear: both;">'
@@ -101,16 +107,21 @@ let app = new Vue({
                         icon: this.point_icon
                     }).addTo(this.map).bindPopup(popupContent))
                 })
+                if (this.layer_launch_sites !== null) {
+                    this.layer_launch_sites.removeFrom(this.map)
+                }
                 this.layer_launch_sites = L.layerGroup(launchSitesMarkers)
                 this.map.addLayer(this.layer_launch_sites)
-                this.launch_sites_loading = false
+                if (this.view !== 'launch_sites') {
+                    this.layer_launch_sites.removeFrom(this.map)
+                }
             }
         },
-        receive_stations: {
+        filtered_receive_stations: {
             deep: true,
             handler () {
                 let receiveStationMarkers = []
-                this.receive_stations.forEach((receiveStation) => {
+                this.filtered_receive_stations.forEach((receiveStation) => {
                     let popupContent = '<h5 class="card-title">' + receiveStation.name + '</h5>'
                     if (receiveStation.operator) {
                         popupContent += '<span class="font-weight-bold text-muted">Operator</span> ' + receiveStation.operator + '<br>'
@@ -142,13 +153,17 @@ let app = new Vue({
                         icon: this.point_icon
                     }).addTo(this.map).bindPopup(popupContent))
                 })
+                if (this.layer_receive_stations !== null) {
+                    this.layer_receive_stations.removeFrom(this.map)
+                }
                 this.layer_receive_stations = L.layerGroup(receiveStationMarkers)
                 this.map.addLayer(this.layer_receive_stations)
-                this.layer_receive_stations.removeFrom(this.map)
-                this.receive_stations_loading = false
+                if (this.view !== 'receive_stations') {
+                    this.layer_receive_stations.removeFrom(this.map)
+                }
             }
         },
-        hunters: {
+        filtered_hunters: {
             deep: true,
             handler () {
                 let hunterMarkers = []
@@ -185,38 +200,20 @@ let app = new Vue({
                         fillOpacity: 0.05,
                     }).addTo(this.map).bindPopup(popupContent))
                 })
+                if (this.layer_hunters !== null) {
+                    this.layer_hunters.removeFrom(this.map)
+                }
                 this.layer_hunters = L.layerGroup(hunterMarkers)
                 this.map.addLayer(this.layer_hunters)
-                this.layer_hunters.removeFrom(this.map)
-                this.hunters_loading = false
+                if (this.view !== 'hunters') {
+                    this.layer_hunters.removeFrom(this.map)
+                }
             }
         },
         view: {
             handler (value) {
-                if (this.launch_sites_loading === false) {
-                    this.layer_launch_sites.removeFrom(this.map)
-                }
-                if (this.receive_stations_loading === false) {
-                    this.layer_receive_stations.removeFrom(this.map)
-                }
-                if (this.hunters_loading === false) {
-                    this.layer_hunters.removeFrom(this.map)
-                }
-
-                switch (value) {
-                    case 'launch_sites':
-                        this.layer_launch_sites.addTo(this.map)
-                        break
-                    case 'receive_stations':
-                        this.layer_receive_stations.addTo(this.map)
-                        break
-                    case 'hunters':
-                        this.layer_hunters.addTo(this.map)
-                        break
-                    default:
-                        break
-                }
-            }
+                this.filterMapByView(value)
+            },
         },
     },
     mounted () {
@@ -236,18 +233,21 @@ let app = new Vue({
             fetch(window.api_url + '/launch_sites')
                 .then(response => response.json())
                 .then(launchSites => this.launch_sites = launchSites)
+                .then(() => this.launch_sites_loading = false)
                 .catch(console.log)
         },
         loadReceiveStations () {
             fetch(window.api_url + '/receive_stations')
                 .then(response => response.json())
                 .then(receiveStations => this.receive_stations = receiveStations)
+                .then(() => this.receive_stations_loading = false)
                 .catch(console.log)
         },
         loadHunters () {
             fetch(window.api_url + '/hunters')
                 .then(response => response.json())
                 .then(hunters => this.hunters = hunters)
+                .then(() => this.hunters_loading = false)
                 .catch(console.log)
         },
         proposeLaunchSite () {
@@ -303,6 +303,31 @@ let app = new Vue({
                 maxZoom: 19,
             })
             this.map.addLayer(this.layer_main)
+        },
+        filterMapByView (view) {
+            if (this.launch_sites_loading === false) {
+                this.layer_launch_sites.removeFrom(this.map)
+            }
+            if (this.receive_stations_loading === false) {
+                this.layer_receive_stations.removeFrom(this.map)
+            }
+            if (this.hunters_loading === false) {
+                this.layer_hunters.removeFrom(this.map)
+            }
+
+            switch (view) {
+                case 'launch_sites':
+                    this.layer_launch_sites.addTo(this.map)
+                    break
+                case 'receive_stations':
+                    this.layer_receive_stations.addTo(this.map)
+                    break
+                case 'hunters':
+                    this.layer_hunters.addTo(this.map)
+                    break
+                default:
+                    break
+            }
         },
     },
 })
