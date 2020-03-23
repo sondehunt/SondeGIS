@@ -10,7 +10,7 @@ let app = new Vue({
             iconUrl: 'assets/circle.svg',
             iconSize: [10, 10],
             iconAnchor: [5, 5],
-            popupAnchor: [0, -5]
+            popupAnchor: [0, -5],
         }),
         view: 'launch_sites',
         layer_main: null,
@@ -49,6 +49,38 @@ let app = new Vue({
         proposal: {
             email: '',
             comment: '',
+        },
+        filters: {
+            launch_sites: {
+                types: {
+                    operational: false,
+                    sporadic: false,
+                },
+                observation_times: {
+                    one_per_day: false,
+                    two_per_day: false,
+                    four_per_day: false,
+                },
+                sonde_families: {
+                    vaisala: false,
+                    lockheed_martin: false,
+                    meteomodem: false,
+                    graw: false,
+                    meisei: false,
+                    var_russian: false,
+                    var_chinese: false,
+                },
+            },
+            receive_stations: {
+                aprs: false,
+                sondehub: false,
+                radiosondy: false,
+                wetterson: false,
+                proprietary: false,
+            },
+            hunters: {
+                hunting_probability: 0,
+            },
         },
     },
     methods: {
