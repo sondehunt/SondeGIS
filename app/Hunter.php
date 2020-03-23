@@ -51,6 +51,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Hunter whereProposalEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Hunter whereRadius($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Hunter whereUpdatedAt($value)
+ * @property bool $head
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Hunter ofBase()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Hunter whereHead($value)
  */
 class Hunter extends Model
 {
@@ -67,6 +70,7 @@ class Hunter extends Model
     ];
 
     protected $casts = [
+        'head' => 'boolean',
         'contact' => 'array',
     ];
 }
