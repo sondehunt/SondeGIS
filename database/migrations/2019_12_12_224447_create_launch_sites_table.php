@@ -13,25 +13,29 @@ class CreateLaunchSitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('launch_sites', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('base_id')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-            $table->unsignedBigInteger('approve_token_id');
-            $table->timestamp('approved_at')->nullable();
+        Schema::create(
+            'launch_sites',
+            function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->unsignedBigInteger('base_id')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
+                $table->timestamp('approved_at')->nullable();
+                $table->unsignedBigInteger('approve_token_id');
+                $table->boolean('head')->default(false);
 
-            $table->string('proposal_email')->nullable();
-            $table->text('proposal_comment')->nullable();
+                $table->string('proposal_email')->nullable();
+                $table->text('proposal_comment')->nullable();
 
-            $table->string('name');
-            $table->string('operator');
-            $table->integer('wmo-id')->nullable();
-            $table->double('latitude')->nullable();
-            $table->double('longitude')->nullable();
-            $table->double('elevation')->nullable();
-            $table->json('launch')->nullable();
-        });
+                $table->string('name');
+                $table->string('operator');
+                $table->integer('wmo_id')->nullable();
+                $table->double('latitude')->nullable();
+                $table->double('longitude')->nullable();
+                $table->double('elevation')->nullable();
+                $table->json('launch')->nullable();
+            }
+        );
     }
 
     /**

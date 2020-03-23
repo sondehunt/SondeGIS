@@ -18,8 +18,9 @@ class CreateHuntersTable extends Migration
             $table->unsignedBigInteger('base_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->unsignedBigInteger('approve_token_id');
             $table->timestamp('approved_at')->nullable();
+            $table->unsignedBigInteger('approve_token_id');
+            $table->boolean('head')->default(false);
 
             $table->string('proposal_email')->nullable();
             $table->text('proposal_comment')->nullable();
