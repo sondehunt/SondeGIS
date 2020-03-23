@@ -192,11 +192,11 @@
         <div v-else-if="view=='hunters'" class="overlay card scrollable ml-3"
              style="z-index: 500; margin-top: calc(2rem + 38px)">
             <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">Hunting Probability</h6>
-                <input type="range" class="custom-range" style="width:200px" title="Hunting Probability"
-                       v-model="filters.hunters.hunting_probability" min="0" max="100">
+                <h6 class="card-subtitle mb-2 text-muted">Hunting Activity Probability</h6>
+                <input type="range" class="custom-range" style="width:250px" title="Hunting Activity Probability"
+                       v-model="filters.hunters.hunting_activity" min="0" max="100">
                 <br>
-                <span class="text-muted">@{{ filters.hunters.hunting_probability }} % to 100 %</span>
+                <span class="text-muted">@{{ filters.hunters.hunting_activity }} % to 100 %</span>
             </div>
         </div>
     </div>

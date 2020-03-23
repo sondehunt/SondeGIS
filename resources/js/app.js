@@ -79,7 +79,7 @@ let app = new Vue({
                 proprietary: false,
             },
             hunters: {
-                hunting_probability: 0,
+                hunting_activity: 0,
             },
         },
     },
@@ -239,7 +239,7 @@ let app = new Vue({
                         popupContent += '<span class="font-weight-bold text-muted">Hunting Radius</span> ' + hunter.radius + ' km<br>'
                     }
                     if (hunter.activity) {
-                        popupContent += '<span class="font-weight-bold text-muted">Hunting Activity Propability</span> ' + Math.floor(hunter.activity * 100) + ' %<br>'
+                        popupContent += '<span class="font-weight-bold text-muted">Hunting Activity Probability</span> ' + Math.floor(hunter.activity * 100) + ' %<br>'
                     }
                     if (hunter.contact) {
                         popupContent += '<span class="font-weight-bold text-muted">Contact</span><br>'
