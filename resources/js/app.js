@@ -144,7 +144,7 @@ let app = new Vue({
                 let launchSitesMarkers = []
                 this.launch_sites.forEach((launchSite) => {
                     let popupContent = '<h5 class="card-title">' + launchSite.name + '</h5>'
-                    popupContent += '<a href="javascript:void(0)" class="btn btn-primary mt-1">Edit</a>'
+                    popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
                     popupContent += '<div style="clear: both;">'
                     launchSitesMarkers.push(L.marker([launchSite.latitude, launchSite.longitude], {
                         icon: this.point_icon
@@ -185,7 +185,7 @@ let app = new Vue({
                             popupContent += '<span class="badge badge-info mr-1">' + report + '</span>'
                         }
                     }
-                    popupContent += '<a href="javascript:void(0)" class="btn btn-primary mt-1">Edit</a>'
+                    popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
                     popupContent += '<div style="clear: both;">'
                     receiveStationMarkers.push(L.marker([receiveStation.latitude, receiveStation.longitude], {
                         icon: this.point_icon
@@ -226,7 +226,7 @@ let app = new Vue({
                             popupContent += ucFirst(contactType) + ': ' + userText + '<br>'
                         }
                     }
-                    popupContent += '<a href="javascript:void(0)" class="btn btn-primary mt-1">Edit</a>'
+                    popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
                     popupContent += '<div style="clear: both;">'
                     hunterMarkers.push(L.circle([hunter.latitude, hunter.longitude], {
                         radius: hunter.radius * 1000,

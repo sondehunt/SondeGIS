@@ -8,11 +8,19 @@ html, body, #app, #map {
     width: 100%;
 }
 
+.navbar {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
 .wrapper {
     height: calc(100% - 56px);
     width: 100%;
     position: relative;
     top: 56px;
+
+    .card {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
 }
 
 .overlay, .underlay {
@@ -26,8 +34,8 @@ html, body, #app, #map {
 }
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.3);
     border-radius: .25rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .leaflet-container a.leaflet-popup-close-button {
@@ -66,7 +74,5 @@ html, body, #app, #map {
 }
 
 .leaflet-container a.btn {
-    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.3);
-    color: white;
     float: right;
 }
