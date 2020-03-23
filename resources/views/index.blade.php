@@ -62,20 +62,23 @@
         <!--VIEW SELECTOR-->
         <div class="overlay card mt-3 ml-3" style="z-index: 501;">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label v-on:click="view='launch_sites'" class="btn btn-outline-primary active">
-                    <input type="radio" name="view" autocomplete="off" :checked="view=='launch_sites'">
+                <label v-on:click="view='launch_sites'"
+                       :class="'btn btn-outline-primary' + (view === 'launch_sites' ? ' active' : '')">
+                    <input type="radio" name="view" autocomplete="off">
                     Launch Sites
                     <span v-if="launch_sites_loading" class="spinner-grow spinner-grow-sm" role="status"
                           aria-hidden="true"></span>
                 </label>
-                <label v-on:click="view='receive_stations'" class="btn btn-outline-info">
-                    <input type="radio" name="view" autocomplete="off" :checked="view=='receive_stations'">
+                <label v-on:click="view='receive_stations'"
+                       :class="'btn btn-outline-info' + (view === 'receive_stations' ? ' active' : '')">
+                    <input type="radio" name="view" autocomplete="off">
                     Receive Stations
                     <span v-if="receive_stations_loading" class="spinner-grow spinner-grow-sm" role="status"
                           aria-hidden="true"></span>
                 </label>
-                <label v-on:click="view='hunters'" class="btn btn-outline-secondary">
-                    <input type="radio" name="view" autocomplete="off" :checked="view=='hunters'">
+                <label v-on:click="view='hunters'"
+                       :class="'btn btn-outline-secondary' + (view === 'hunters' ? ' active' : '')">
+                    <input type="radio" name="view" autocomplete="off">
                     Hunters
                     <span v-if="hunters_loading" class="spinner-grow spinner-grow-sm" role="status"
                           aria-hidden="true"></span>
@@ -194,7 +197,7 @@
             <div class="card-body">
                 <h6 class="card-subtitle mb-2 text-muted">Hunting Activity Probability</h6>
                 <input type="range" class="custom-range" style="width:250px" title="Hunting Activity Probability"
-                       v-model="filters.hunters.hunting_activity" min="0" max="100">
+                       v-model.number="filters.hunters.hunting_activity" min="0" max="100">
                 <br>
                 <span class="text-muted">@{{ filters.hunters.hunting_activity }} % to 100 %</span>
             </div>
