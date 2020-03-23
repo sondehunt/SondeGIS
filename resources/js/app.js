@@ -12,7 +12,7 @@ let app = new Vue({
             iconAnchor: [5, 5],
             popupAnchor: [0, -5],
         }),
-        view: 'launch_sites',
+        view: 'hunters',
         layer_main: null,
         layer_launch_sites: null,
         layer_receive_stations: null,
@@ -82,6 +82,154 @@ let app = new Vue({
                 hunting_activity: 0,
             },
         },
+    },
+    computed: {
+        filtered_hunters () {
+            return this.hunters
+        }
+    },
+    watch: {
+        launch_sites: {
+            deep: true,
+            handler () {
+                let launchSitesMarkers = []
+                this.launch_sites.forEach((launchSite) => {
+                    let popupContent = '<h5 class="card-title">' + launchSite.name + '</h5>'
+                    popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
+                    popupContent += '<div style="clear: both;">'
+                    launchSitesMarkers.push(L.marker([launchSite.latitude, launchSite.longitude], {
+                        icon: this.point_icon
+                    }).addTo(this.map).bindPopup(popupContent))
+                })
+                this.layer_launch_sites = L.layerGroup(launchSitesMarkers)
+                this.map.addLayer(this.layer_launch_sites)
+                this.launch_sites_loading = false
+            }
+        },
+        receive_stations: {
+            deep: true,
+            handler () {
+                let receiveStationMarkers = []
+                this.receive_stations.forEach((receiveStation) => {
+                    let popupContent = '<h5 class="card-title">' + receiveStation.name + '</h5>'
+                    if (receiveStation.operator) {
+                        popupContent += '<span class="font-weight-bold text-muted">Operator</span> ' + receiveStation.operator + '<br>'
+                    }
+                    if (receiveStation.elevation) {
+                        popupContent += '<span class="font-weight-bold text-muted">Elevation</span> ' + receiveStation.elevation + ' m<br>'
+                    }
+                    if (receiveStation.antenna_height) {
+                        popupContent += '<span class="font-weight-bold text-muted">Antenna Height</span> ' + receiveStation.antenna_height + ' m<br>'
+                    }
+                    if (receiveStation.antenna_type) {
+                        popupContent += '<span class="font-weight-bold text-muted">Antenna Type</span><br>' + receiveStation.antenna_type + '<br>'
+                    }
+                    if (receiveStation.processing_system_type) {
+                        popupContent += '<span class="font-weight-bold text-muted">Processing System Type</span><br>' + receiveStation.processing_system_type + '<br>'
+                    }
+                    if (receiveStation.concurrent_receivers) {
+                        popupContent += '<span class="font-weight-bold text-muted">Concurrent Receivers</span> ' + receiveStation.concurrent_receivers + '<br>'
+                    }
+                    if (receiveStation.reporting_to) {
+                        popupContent += '<span class="font-weight-bold text-muted">Reporting To</span><br>'
+                        for (let report of receiveStation.reporting_to) {
+                            popupContent += '<span class="badge badge-info mr-1">' + report + '</span>'
+                        }
+                    }
+                    popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
+                    popupContent += '<div style="clear: both;">'
+                    receiveStationMarkers.push(L.marker([receiveStation.latitude, receiveStation.longitude], {
+                        icon: this.point_icon
+                    }).addTo(this.map).bindPopup(popupContent))
+                })
+                this.layer_receive_stations = L.layerGroup(receiveStationMarkers)
+                this.map.addLayer(this.layer_receive_stations)
+                this.layer_receive_stations.removeFrom(this.map)
+                this.receive_stations_loading = false
+            }
+        },
+        hunters: {
+            deep: true,
+            handler () {
+                let hunterMarkers = []
+                this.filtered_hunters.forEach((hunter) => {
+                    let popupContent = '<h5 class="card-title">' + hunter.name + '</h5>'
+                    if (hunter.radius) {
+                        popupContent += '<span class="font-weight-bold text-muted">Hunting Radius</span> ' + hunter.radius + ' km<br>'
+                    }
+                    if (hunter.activity) {
+                        popupContent += '<span class="font-weight-bold text-muted">Hunting Activity Probability</span> ' + Math.floor(hunter.activity * 100) + ' %<br>'
+                    }
+                    if (hunter.contact) {
+                        popupContent += '<span class="font-weight-bold text-muted">Contact</span><br>'
+                        for (let contactType in hunter.contact) {
+                            let userText = ''
+                            switch (contactType) {
+                                case 'telegram':
+                                    userText = '<a href="https://t.me/' + hunter.contact[contactType] + '" target="_blank">@' + hunter.contact[contactType] + '</a>'
+                                    break
+                                case 'twitter':
+                                    userText = '<a href="https://twitter.com/' + hunter.contact[contactType] + '" target="_blank">@' + hunter.contact[contactType] + '</a>'
+                                    break
+                                default:
+                                    userText = hunter.contact[contactType]
+                            }
+                            popupContent += ucFirst(contactType) + ': ' + userText + '<br>'
+                        }
+                    }
+                    popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
+                    popupContent += '<div style="clear: both;">'
+                    hunterMarkers.push(L.circle([hunter.latitude, hunter.longitude], {
+                        radius: hunter.radius * 1000,
+                        opacity: hunter.activity,
+                        fillOpacity: 0.05,
+                    }).addTo(this.map).bindPopup(popupContent))
+                })
+                this.layer_hunters = L.layerGroup(hunterMarkers)
+                this.map.addLayer(this.layer_hunters)
+                this.layer_hunters.removeFrom(this.map)
+                this.hunters_loading = false
+            }
+        },
+        view: {
+            handler (value) {
+                if (this.launch_sites_loading === false) {
+                    this.layer_launch_sites.removeFrom(this.map)
+                }
+                if (this.receive_stations_loading === false) {
+                    this.layer_receive_stations.removeFrom(this.map)
+                }
+                if (this.hunters_loading === false) {
+                    this.layer_hunters.removeFrom(this.map)
+                }
+
+                switch (value) {
+                    case 'launch_sites':
+                        this.layer_launch_sites.addTo(this.map)
+                        break
+                    case 'receive_stations':
+                        this.layer_receive_stations.addTo(this.map)
+                        break
+                    case 'hunters':
+                        this.layer_hunters.addTo(this.map)
+                        break
+                    default:
+                        break
+                }
+            }
+        },
+    },
+    mounted () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.map.setView(new L.LatLng(position.coords.latitude, position.coords.longitude), 7)
+            })
+        }
+        this.initSelects()
+        this.initMap()
+        this.loadLaunchSites()
+        this.loadReceiveStations()
+        this.loadHunters()
     },
     methods: {
         loadLaunchSites () {
@@ -157,147 +305,4 @@ let app = new Vue({
             this.map.addLayer(this.layer_main)
         },
     },
-    mounted () {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                this.map.setView(new L.LatLng(position.coords.latitude, position.coords.longitude), 7)
-            })
-        }
-        this.initSelects()
-        this.initMap()
-        this.loadLaunchSites()
-        this.loadReceiveStations()
-        this.loadHunters()
-    },
-    watch: {
-        launch_sites: {
-            deep: true,
-            handler () {
-                let launchSitesMarkers = []
-                this.launch_sites.forEach((launchSite) => {
-                    let popupContent = '<h5 class="card-title">' + launchSite.name + '</h5>'
-                    popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
-                    popupContent += '<div style="clear: both;">'
-                    launchSitesMarkers.push(L.marker([launchSite.latitude, launchSite.longitude], {
-                        icon: this.point_icon
-                    }).addTo(this.map).bindPopup(popupContent))
-                })
-                this.layer_launch_sites = L.layerGroup(launchSitesMarkers)
-                this.map.addLayer(this.layer_launch_sites)
-                this.launch_sites_loading = false
-            }
-        },
-        receive_stations: {
-            deep: true,
-            handler () {
-                let receiveStationMarkers = []
-                this.receive_stations.forEach((receiveStation) => {
-                    let popupContent = '<h5 class="card-title">' + receiveStation.name + '</h5>'
-                    if (receiveStation.operator) {
-                        popupContent += '<span class="font-weight-bold text-muted">Operator</span> ' + receiveStation.operator + '<br>'
-                    }
-                    if (receiveStation.elevation) {
-                        popupContent += '<span class="font-weight-bold text-muted">Elevation</span> ' + receiveStation.elevation + ' m<br>'
-                    }
-                    if (receiveStation.antenna_height) {
-                        popupContent += '<span class="font-weight-bold text-muted">Antenna Height</span> ' + receiveStation.antenna_height + ' m<br>'
-                    }
-                    if (receiveStation.antenna_type) {
-                        popupContent += '<span class="font-weight-bold text-muted">Antenna Type</span><br>' + receiveStation.antenna_type + '<br>'
-                    }
-                    if (receiveStation.processing_system_type) {
-                        popupContent += '<span class="font-weight-bold text-muted">Processing System Type</span><br>' + receiveStation.processing_system_type + '<br>'
-                    }
-                    if (receiveStation.concurrent_receivers) {
-                        popupContent += '<span class="font-weight-bold text-muted">Concurrent Receivers</span> ' + receiveStation.concurrent_receivers + '<br>'
-                    }
-                    if (receiveStation.reporting_to) {
-                        popupContent += '<span class="font-weight-bold text-muted">Reporting To</span><br>'
-                        for (let report of receiveStation.reporting_to) {
-                            popupContent += '<span class="badge badge-info mr-1">' + report + '</span>'
-                        }
-                    }
-                    popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
-                    popupContent += '<div style="clear: both;">'
-                    receiveStationMarkers.push(L.marker([receiveStation.latitude, receiveStation.longitude], {
-                        icon: this.point_icon
-                    }).addTo(this.map).bindPopup(popupContent))
-                })
-                this.layer_receive_stations = L.layerGroup(receiveStationMarkers)
-                this.map.addLayer(this.layer_receive_stations)
-                this.layer_receive_stations.removeFrom(this.map)
-                this.receive_stations_loading = false
-            }
-        },
-        hunters: {
-            deep: true,
-            handler () {
-                let hunterMarkers = []
-                this.hunters.forEach((hunter) => {
-                    let popupContent = '<h5 class="card-title">' + hunter.name + '</h5>'
-                    if (hunter.radius) {
-                        popupContent += '<span class="font-weight-bold text-muted">Hunting Radius</span> ' + hunter.radius + ' km<br>'
-                    }
-                    if (hunter.activity) {
-                        popupContent += '<span class="font-weight-bold text-muted">Hunting Activity Probability</span> ' + Math.floor(hunter.activity * 100) + ' %<br>'
-                    }
-                    if (hunter.contact) {
-                        popupContent += '<span class="font-weight-bold text-muted">Contact</span><br>'
-                        for (let contactType in hunter.contact) {
-                            let userText = ''
-                            switch (contactType) {
-                                case 'telegram':
-                                    userText = '<a href="https://t.me/' + hunter.contact[contactType] + '" target="_blank">@' + hunter.contact[contactType] + '</a>'
-                                    break
-                                case 'twitter':
-                                    userText = '<a href="https://twitter.com/' + hunter.contact[contactType] + '" target="_blank">@' + hunter.contact[contactType] + '</a>'
-                                    break
-                                default:
-                                    userText = hunter.contact[contactType]
-                            }
-                            popupContent += ucFirst(contactType) + ': ' + userText + '<br>'
-                        }
-                    }
-                    popupContent += '<a href="javascript:void(0)" class="btn btn-outline-primary mt-1">Edit</a>'
-                    popupContent += '<div style="clear: both;">'
-                    hunterMarkers.push(L.circle([hunter.latitude, hunter.longitude], {
-                        radius: hunter.radius * 1000,
-                        opacity: hunter.activity,
-                        fillOpacity: 0.05,
-                    }).addTo(this.map).bindPopup(popupContent))
-                })
-                this.layer_hunters = L.layerGroup(hunterMarkers)
-                this.map.addLayer(this.layer_hunters)
-                this.layer_hunters.removeFrom(this.map)
-                this.hunters_loading = false
-            }
-        },
-        view: {
-            handler (value) {
-                if (this.launch_sites_loading === false) {
-                    this.layer_launch_sites.removeFrom(this.map)
-                }
-                if (this.receive_stations_loading === false) {
-                    this.layer_receive_stations.removeFrom(this.map)
-                }
-                if (this.hunters_loading === false) {
-                    this.layer_hunters.removeFrom(this.map)
-                }
-
-                switch (value) {
-                    case 'launch_sites':
-                        this.layer_launch_sites.addTo(this.map)
-                        break
-                    case 'receive_stations':
-                        this.layer_receive_stations.addTo(this.map)
-                        break
-                    case 'hunters':
-                        this.layer_hunters.addTo(this.map)
-                        break
-                    default:
-                        break
-                }
-            }
-        }
-    }
 })
