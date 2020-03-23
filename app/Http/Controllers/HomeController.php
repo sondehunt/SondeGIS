@@ -17,9 +17,7 @@ class HomeController extends Controller
     public function approveLaunchSite(LaunchSite $launchSite, string $token)
     {
         if ($launchSite->approveToken->token === $token) {
-            $launchSite->approved_at = Carbon::now();
-            $launchSite->save();
-            return 'proposal approved';
+            return view('index', ['launch_site' => $launchSite, 'token' => $token]);
         }
         return 'token invalid';
     }
@@ -29,7 +27,7 @@ class HomeController extends Controller
         if ($receiveStation->approveToken->token === $token) {
             $receiveStation->approved_at = Carbon::now();
             $receiveStation->save();
-            return 'proposal approved';
+            return view('index', ['receive_station' => $receiveStation, 'token' => $token]);
         }
         return 'token invalid';
     }
@@ -37,9 +35,7 @@ class HomeController extends Controller
     public function approveHunter(Hunter $hunter, string $token)
     {
         if ($hunter->approveToken->token === $token) {
-            $hunter->approved_at = Carbon::now();
-            $hunter->save();
-            return 'proposal approved';
+            return view('index', ['hunter' => $hunter, 'token' => $token]);
         }
         return 'token invalid';
     }

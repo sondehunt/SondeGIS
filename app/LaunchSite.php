@@ -72,6 +72,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property float|null $longitude
  * @method static \Illuminate\Database\Eloquent\Builder|\App\LaunchSite whereLatitude($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\LaunchSite whereLongitude($value)
+ * @property bool $head
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\LaunchSite ofBase()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\LaunchSite whereHead($value)
  */
 class LaunchSite extends Model
 {
@@ -81,7 +84,7 @@ class LaunchSite extends Model
     protected $fillable = [
         'name',
         'operator',
-        'wmo-id',
+        'wmo_id',
         'latitude',
         'longitude',
         'elevation',
@@ -89,6 +92,7 @@ class LaunchSite extends Model
     ];
 
     protected $casts = [
+        'head' => 'boolean',
         'launch' => 'array',
     ];
 }

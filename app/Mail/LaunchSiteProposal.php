@@ -30,7 +30,7 @@ class LaunchSiteProposal extends Mailable
      */
     public function build() : self
     {
-        return $this->view('mail.launch_site')
+        return $this->view('mail.launch_site', ['launch_site' => $this->launchSite])
             ->to(env('APP_ADMIN_MAIL'))
             ->from('gis@sondehunt.de')
             ->replyTo($this->launchSite->proposal_email);

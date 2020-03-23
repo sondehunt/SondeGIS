@@ -63,6 +63,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property float $longitude
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereLatitude($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereLongitude($value)
+ * @property bool $head
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation ofBase()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ReceiveStation whereHead($value)
  */
 class ReceiveStation extends Model
 {
@@ -83,6 +86,7 @@ class ReceiveStation extends Model
     ];
 
     protected $casts = [
+        'head' => 'boolean',
         'reporting_to' => 'array',
     ];
 }

@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 use App\LaunchSite;
 use App\Mail\LaunchSiteProposal;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Mail;
 
 class LaunchSiteController extends Controller
 {
     public function index()
     {
-        $a = LaunchSite::approved()->get();
-        Log::debug('ok');
-        return $a;
+        return LaunchSite::approved()->get();
     }
 
     public function store(Request $request)
@@ -37,6 +34,17 @@ class LaunchSiteController extends Controller
         $proposal->base()->associate($launchSite);
         $proposal->save();
         Mail::send(new LaunchSiteProposal($proposal), []);
+        return response()->json();
+    }
+
+    public function approve(Request $request, LaunchSite $proposal)
+    {
+        $token = $request->get('token');
+        if ($proposal->approveToken->token === $token) {
+            $proposal->update($request->all());
+            $proposal->approve();
+            return response()->json(['success' => true]);
+        }
         return response()->json();
     }
 }
