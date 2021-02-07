@@ -27,8 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1.1.0
-    - name: Update Composer
-      run: composer update
     - name: Install PHP Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Install JS Dependencies
